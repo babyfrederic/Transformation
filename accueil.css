@@ -462,7 +462,7 @@ div.orbit:after {
     display: inline-block;
     height: 40px;
     width: 2px;
-    background: #aaa;
+    background: ed8f09; /* orange*/
     vertical-align: middle;
     animation: 1s blink linear infinite;
   }
