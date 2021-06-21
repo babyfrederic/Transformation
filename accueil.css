@@ -521,18 +521,24 @@ div.orbit:after {
     height: 10px;
     border-radius: 50%;
   }
+ /* rouges # E57373 */
   .IA_window .bar .buttons span:nth-of-type(1) {
     background: #EF5350;
     background: linear-gradient(#E57373, #EF5350);
   }
+
+ /* jaunes #FFEE58 */
   .IA_window .bar .buttons span:nth-of-type(2) {
     background: #FFD54F;
     background: linear-gradient(#FFEE58, #FFD54F);
   }
+
+ /* verts #A5D6A7 */
   .IA_window .bar .buttons span:nth-of-type(3) {
     background: #66BB6A;
     background: linear-gradient(#A5D6A7, #66BB6A);
   }
+
   .IA_window .bar .link {
     position: absolute;
     bottom: 5px;
