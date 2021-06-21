@@ -454,7 +454,7 @@ div.orbit:after {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #C11B17;
+    background: #C11B17; /*rouge*/
     color: white;
     padding: 10px;
     font-size: 22px;
@@ -523,6 +523,7 @@ div.orbit:after {
     height: 10px;
     border-radius: 50%;
   }
+
  /* rouges # E57373 */
   .IA_window .bar .buttons span:nth-of-type(1) {
     background: #EF5350;
