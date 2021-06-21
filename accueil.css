@@ -24,7 +24,8 @@ h1 {
   transform-style: preserve-3d;
   /* background-color: rgba(0, 0, 0, 0.1); */
    /*color: #1722b1 bleu marine texte */
-  color: #1722b1;
+   /*color: #f7b20c orange   texte */
+  color: #f7b20c;
   display: inline-block;
   font-size: 160px;
   position: relative;
