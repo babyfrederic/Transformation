@@ -399,7 +399,7 @@ div.orbit.orbit-20:after {
 div.orbit:after {
   -webkit-animation: planet-rotate 10s linear infinite;
   animation: planet-rotate 10s linear infinite;
-  background-color: #66cc99;
+  background-color: #e563f4;   /* violet #e563f4 remplace vert de chaque orbite #66cc99 */ 
   border-radius: 50%;
   content: "";
   display: block;
