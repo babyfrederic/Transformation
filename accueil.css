@@ -23,7 +23,7 @@ section.wrapper:before {
 h1 {
   transform-style: preserve-3d;
   /* background-color: rgba(0, 0, 0, 0.1); */
-  color: #3B3E42;
+  color: #15b8d8;
   display: inline-block;
   font-size: 180px;
   position: relative;
