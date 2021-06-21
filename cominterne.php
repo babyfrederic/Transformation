@@ -319,10 +319,6 @@
     </section><!--/#about-->
 
 
-
-
-
-
     <section id="blog">
         <div class="container">
             <div class="section-header">
