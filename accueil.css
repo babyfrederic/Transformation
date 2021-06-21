@@ -23,9 +23,10 @@ section.wrapper:before {
 h1 {
   transform-style: preserve-3d;
   /* background-color: rgba(0, 0, 0, 0.1); */
+   /*color: #1722b1 bleu marine texte */
   color: #1722b1;
   display: inline-block;
-  font-size: 180px;
+  font-size: 160px;
   position: relative;
   vertical-align: middle;
 }
