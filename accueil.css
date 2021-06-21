@@ -45,7 +45,7 @@ div.orbit.orbit-1 {
   right: 0;
   bottom: 0;
   left: -9.4%;
-  width: 118.8%;
+  width: 318.8%;
 }
 div.orbit.orbit-1:after {
   -webkit-animation-delay: -6.8s;
@@ -63,7 +63,7 @@ div.orbit.orbit-2 {
   right: 0;
   bottom: 0;
   left: -0.4%;
-  width: 100.8%;
+  width: 600.8%;
 }
 div.orbit.orbit-2:after {
   -webkit-animation-delay: -0.3s;
