@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <title>Jquery animations</title>
+    <script src='http://code.jquery.com/jquery-3.5.1.js'></script>
+</head>
+
+<body>
+    <style>
+        #boxwrapper {
+            background-color: yellow;
+            height: auto;
+            width: 400px;
+            border: solid 1px black;
+            cursor: pointer;
+        }
+		
+       #boxwrapper2 {
+            background-color: gold;
+            height: auto;
+            width: 400px;
+            border: solid 1px black;
+            cursor: pointer;
+        }
+		
+		#boxwrapper3 {
+            background-color: gold;
+            height: auto;
+            width: 400px;
+            border: solid 1px black;
+            cursor: pointer;
+        }
+        #box {
+            background-color: green;
+            height: 100px;
+            width: 100%;
+            /* border: solid 1px green;*/
+        }
+		
+        #box2 {
+            background-color: greenyellow;
+            height: 100px;
+            width: 100%;
+            /* border: solid 1px green;*/
+        }
+		
+	   #box3 {
+            background-color: lightpink;
+            height: 130px;
+            width: 100%;
+            /* border: solid 1px green;*/
+        }
+    </style>
+	<center>
+		<div id="boxwrapper">
+			<h2><center>Cliquez moi plusieurs fois</center></h2>
+			<div id="box">
+				<center> Démonstration Partie Cachée sur clic 
+					</p> basée Jquery slideUp, FadeOut 
+				    </p>- Baby Fred 2021 - SlideToggle
+				</center>
+			</div>
+		</div>
+	</center>
+
+	<!-- deuxieme box -->
+	<center> 
+		<div id="boxwrapper2">
+			<h2>Partie Toujours Visible</h2>
+			<div id="box2">
+				<center> Sous menus dynamiques sur clic souris
+				<!--	</p> basée Jquery slideUp, FadeOut -->
+				    </p>- Baby Fred 2021 - SlideToggle
+			<li><a href="../Index.html">lien retour</a></li>
+				</center>
+			</div>
+		</div>
+	</center>
+
+	<!--  box 3  -->
+	<center>
+		<div id="boxwrapper3">
+			<h2>Partie Menu Transformation </h2>
+			<div id="box3">
+				<center> Transformation sous menu->
+					</center>
+				<img border="0" alt="sphere" src= "../Images/boule5.png" width="80" height="80">
+				<li><a href="http://www.google.com" target="_blank">lien vers ailleurs</a></li>
+				
+			</div>
+		</div>
+	</center> 
+	<!--</center> -->
+</body>
+
+<script>
+
+    $(function () {
+        $('#boxwrapper').on('click', function (e) {
+
+            $('#box').slideToggle()
+
+        })
+    })
+	
+	$(function () {
+        $('#boxwrapper2').on('click', function (e) {
+
+            $('#box2').slideToggle()
+
+        })
+    })
+		$(function () {
+        $('#boxwrapper3').on('click', function (e) {
+
+            $('#box3').slideToggle()
+
+        })
+    })
+</script>
+
+</html>
