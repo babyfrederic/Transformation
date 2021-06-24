@@ -1,0 +1,2586 @@
+﻿<!DOCTYPE html>
+
+<!--
+ * Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le modifier
+ * sous les termes de la licence publique générale limitée GNU telle que publiée par
+ * la Free Software Foundation, soit la version 3 de la Licence, soit
+ * (à votre choix) toute version ultérieure.
+
+ * jQuery.tagcanvas 2.10
+ * Pour plus d'informations, veuillez contacter <graham@goat1000.com>
+-->
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>TagCanvas jQuery Utilisé pour Transformation 2. Include </title>
+    <script type="text/javascript" src="excanvas.js"></script>
+    <script src="jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="tagcanvas.min.js" type="text/javascript"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="jquery.tagcanvas.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="js/jquery-1.7.2.min.js" type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="accueil.css">
+    <script defer src ="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script defer src="accueil.js"></script>
+  
+    <script type="text/javascript">
+      $(document).ready(function() {
+        if(!$('#myCanvas').tagcanvas({
+          textColour: '#ff0000',
+          outlineColour: '#ff00ff',
+          reverse: true,
+          depth: 0.8,
+          maxSpeed: 0.05
+        },'tags')) {
+          // si quelque chose ne va pas alors cacher le container
+          $('#myCanvasContainer').hide();
+        }
+      });
+    </script>
+</head>
+<body>
+    <h4>Page Transformation avec liens </h4>
+    <div id="myCanvasContainer">
+        <canvas width="300" height="300 " id="myCanvas">
+          <p>un truc </p> 
+        </canvas>
+    </div>
+    <div id="tags">
+        <ul>
+            <li> <a href = "/poisson" > Poisson </a> </li> 
+            <li> <a href = "/chips" > Chips </a > </li> 
+            <li> <a href = "/salt" > Sel </a> </li> 
+            <li> <a href = "/vinegar" > Vinaigre </a> </li>
+        </ul>
+    </div>
+    <title>Tag2</title>
+    <h4>Page Transformation avec liens </h4>
+    <div id="myCanvasContainer">
+        <canvas width="600" height="600 " id="myCanvas">
+           <a href="../Images/boule4.png"><img src="../Images/boule4.png" width="20" height="20" > 
+        </canvas>
+    </div>
+    <div id="tags">
+        <ul>
+            <a href="../Images/boule1.gif"><img src="../Images/boule1.gif" width="50" height="50" >
+            <a href="../Images/boule3.gif"><img src="../Images/boule3.gif" width="100" height="100"> 
+            <a href="../Images/boule4.png"><img src="../Images/boule4.png" width="20" height="20" > 
+                
+        </ul>
+    </div>
+    <title></title>
+</head>
+<body>
+/* partie initialisation 1
+</body>
+<script type="text/javascript">
+    window.onload = function() {
+      try {
+        TagCanvas.Start('myCanvas');
+      } catch(e) {
+        // something went wrong, hide the canvas container
+        document.getElementById('myCanvasContainer').style.display = 'none';
+      }
+    };
+  </script>
+  
+
+<script type="text/javascript">
+    $(document).ready(function() {
+      if( ! $('#myCanvas').tagcanvas({
+        textColour : '#ffffff',
+        outlineThickness : 1,
+        maxSpeed : 0.03,
+        depth : 0.75
+      })) {
+        // TagCanvas failed to load
+        $('#myCanvasContainer').hide();
+      }
+      // your other jQuery stuff here...
+    });
+
+    $('#myCanvas').tagcanvas({
+     depth : 0.75
+   },'tagList');
+
+   </script>
+   
+
+<!--  la partie des scripts commence ici -->
+
+<script  src = "tagcanvas.min.js "  type = "texte/javascript" ></script>
+<script  src = "jquery-1.4.2 .min.js"  type = "texte/javascript" ></script>
+<script  src = "jquery.tagcanvas.min.js"  type = "text/javascript" ></script>
+<Script>
+    function RSquare(c, w, h, cx, cy) {
+                    var d = ((new Date).getTime() % 10000) * Math.PI / 2500;
+                    c.setTransform(1, 0, 0, 1, 0, 0);
+                    c.translate(cx, cy);
+                    c.rotate(d);
+                    c.globalAlpha = 1;
+                    c.fillStyle = '#000';
+                    c.fillRect(-50, -50, 100, 100);
+                    c.fillStyle = '#fff';
+                    c.fillRect(-40, -40, 80, 80);
+                    c.fillStyle = '#000';
+                    c.fillRect(-30, -30, 60, 60);
+                    c.fillStyle = '#ff0';
+                    c.fillRect(-20, -20, 40, 40);
+                    c.beginPath();
+                    c.moveTo(0, 0);
+                    c.arc(0, 0, 15, 0, Math.PI / 2, 0);
+                    c.lineTo(0, 0);
+                    c.arc(0, 0, 15, Math.PI, 3 * Math.PI / 2, 0);
+                    c.fillStyle = '#000';
+                    c.fill();
+                  }
+                  
+        // set the centreFunc option:
+        TagCanvas.Start('exampleCanvas', 'extags', { centreFunc: RSquare });
+        c.setTransform(1, 0, 0, 1, 0, 0);
+        
+        options['centreImage'] = '../Images/boule4.png';
+</script>
+<script>
+fonction($){
+ "utiliser strict" ;
+    var i, j, abs = Math.abs, sin = Math.sin, cos = Math.cos, max = Math.max,
+    min = Math.min, ceil = Math.ceil, sqrt = Math.sqrt, pow = Math.pow,
+    hexlookup3 = {}, hexlookup2 = {}, hexlookup1 = {
+    0 : "0 », 1 : "17 », 2 : « 34 », 3 : « 51 », 4 : « 68 », 5 : « 85 »,
+    6 : « 102 , », 7 : « 119, », 8 : « 136, », 9 : « 153, »,
+    b:"187,", B:"187,", c:"204,", C:"204,", d:"221,", D:"221,",
+    e:"238,", E:"238,", f:"255,", F:"255,"
+    }, Oproto, Tproto, TCproto, Mproto, Vproto, TSproto, TCVproto,
+    doc = document, ocanvas, audio, audioClick, gestionnaires = {} ;
+    pour(i = 0; i < 256; ++i) {
+    j = i.toString(16);
+    si(je < 16)
+    j = '0' + j;
+    hexlookup2[j] = hexlookup2[j.toUpperCase()] = i.toString() + ',';
+    }
+    fonction définie (d) {
+    return typeof d != 'undefined';
+    }
+    fonction EstObjet(o) {
+    return typeof o == 'objet' && o != null;
+    }
+    fonction Clamp(v, mn, mx) {
+    renvoie estNaN(v) ? mx : min(mx, max(mn, v));
+    }
+    fonction Non() {
+    renvoie faux ;
+    }
+    fonction HeureMaintenant() {
+    renvoie une nouvelle date().valueOf();
+    }
+    function SortList(l, f) {
+    var nl = [], tl = l.longueur, i;
+    pour(i = 0; i < tl; ++i)
+    nl.push(l[i]);
+    nl.sort(f);
+    retour nl;
+    }
+    fonction Shuffle(a) {
+    var i = a.longueur-1, t, p;
+    alors que je) {
+    p = ~~(Math.aléatoire()*i);
+    t = a[i] ;
+    a[i] = a[p] ;
+    a[p] = t;
+    --je;
+    }
+    function SetupAudio() {
+    var ac = window.AudioContext || window.webkitAudioContext;
+    audio = nouveau ac();
+    si(!audio) {
+    audio = « désactivé » ;
+    revenir;
+    }
+    retour audio ;
+    }
+    function AudioIcon (muet, c, taille, décalagex, décalage, trait, couleur) {
+    var x = offsetx, y = offset, s = taille * 0,01, w = 80 * s, h = 100 * s, d = 40 * s, e = 30 * s;
+    varf = e/2;
+    var x2 = x + w, x1 = x2 - d;
+    var y3 = y + h, y2 = y3 - e, y1 = y + e, y4 = y + h / 2;
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.globalAlpha = 1 ;
+    c.strokeStyle = couleur ;
+    c.lineWidth = trait ;
+    c.lineJoin = 'arrondi';
+    c.beginPath();
+    c.moveTo(x1, y1) ;
+    c.ligneVers(x1, y2) ;
+    c.moveTo(x2, y3) ;
+    c.ligneVers(x1, y2) ;
+    c.ligneVers(x, y2) ;
+    c.ligneVers(x, y1) ;
+    c.ligneVers(x1, y1) ;
+    c.ligneVers(x2, y);
+    si (muet) {
+    c.ligneVers(x2, y1) ;
+    c.moveTo(x2, y2) ;
+    c.ligneVers(x2, y3) ;
+    c.moveTo(x2 - f, y4 - f);
+    c.ligneVers(x2 + f, y4 + f);
+    c.moveTo(x2 + f, y4 - f);
+    c.ligneVers(x2 - f, y4 + f);
+    c.coup();
+    revenir;
+    }
+    c.closePath();
+    c.coup();
+    }
+    fonction vecteur(x, y, z) {
+    ceci.x = x;
+    this.y = y;
+    ceci.z = z;
+    }
+    Vproto = Vector.prototype;
+    Vproto.length = function() {
+    return sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    } ;
+    Vproto.dot = fonction(v) {
+    renvoie this.x * vx + this.y * vy + this.z * vz;
+    } ;
+    Vproto.cross = fonction(v) {
+    var x = this.y * vz - this.z * vy,
+    y = ceci.z * vx - ceci.x * vz,
+    z = this.x * vy - this.y * vx;
+    renvoie un nouveau vecteur (x, y, z);
+    } ;
+    Vproto.angle = fonction(v) {
+    var point = this.dot(v), ac;
+    si(point == 0)
+    renvoie Math.PI/2.0 ;
+    ac = point / (this.length() * v.length());
+    si(ac >= 1)
+    renvoie 0 ;
+    si(ac <= -1)
+    renvoie Math.PI;
+    renvoie Math.acos(ac);
+    } ;
+    Vproto.unit = fonction() {
+    var l = this.length();
+    renvoie un nouveau vecteur (this.x / l, this.y / l, this.z / l);
+    } ;
+    fonction MakeVector(lg, lt) {
+    lt = lt * Math.PI / 180 ;
+    lg = lg * Math.PI / 180 ;
+    var x = sin(lg) * cos(lt), y = -sin(lt), z = -cos(lg) * cos(lt);
+    renvoie un nouveau vecteur (x, y, z);
+    }
+    fonction Matrice(a) {
+    this[1] = {1 : a[0], 2 : a[1], 3 : a[2]} ;
+    this[2] = {1 : a[3], 2 : a[4], 3 : a[5]} ;
+    this[3] = {1 : a[6], 2 : a[7], 3 : a[8]} ;
+    }
+    Mproto = Matrix.prototype;
+    Matrice.Identité = fonction() {
+    renvoie une nouvelle matrice([1,0,0, 0,1,0, 0,0,1]);
+    } ;
+    Matrice.Rotation = fonction(angle, u) {
+    var sina = sin(angle), cosa = cos(angle), mcos = 1 - cosa;
+    renvoie une nouvelle matrice ([
+    cosa + pow(ux, 2) * mcos, ux * uy * mcos - uz * sina, ux * uz * mcos + uy * sina,
+    uy * ux * mcos + uz * sina, cosa + pow(uy, 2) * mcos, uy * uz * mcos - ux * sina,
+    uz * ux * mcos - uy * sina, uz * uy * mcos + ux * sina, cosa + pow(uz, 2) * mcos
+    ]);
+    }
+    Mproto.mul = fonction(m) {
+    var a = [], i, j, mmatrix = (m.xform ? 1 : 0);
+    pour(i = 1; i <= 3; ++i)
+    pour(j = 1; j <= 3; ++j) {
+    si (matrice)
+    a.push(this[i][1] * m[1][j] +
+    ceci[i][2] * m[2][j] +
+    this[i][3] * m[3][j]);
+    autre
+    a.push(this[i][j] * m);
+    }
+    retourner une nouvelle matrice(a);
+    } ;
+    Mproto.xform = fonction(p) {
+    var a = {}, x = px, y = py, z = pz;
+    ax = x * this[1][1] + y * this[2][1] + z * this[3][1];
+    ay = x * this[1][2] + y * this[2][2] + z * this[3][2];
+    az = x * this[1][3] + y * this[2][3] + z * this[3][3];
+    retourner un;
+    } ;
+    function PointsOnSphere(n,xr,yr,zr,magic) {
+    var i, y, r, phi, pts = [], off = 2/n, inc;
+    inc = Math.PI * (3 - sqrt(5) + (parseFloat(magic) ? parseFloat(magic) : 0));
+    pour(i = 0; i < n; ++i) {
+    y = i * désactivé - 1 + (désactivé / 2);
+    r = sqrt(1 - y*y);
+    phi = je * inc;
+    pts.push([cos(phi) * r * xr, y * an, sin(phi) * r * zr]);
+    }
+    retour de points ;
+    }
+    function Cylindre(n,o,xr,yr,zr,magic) {
+    var phi, pts = [], off = 2/n, inc, i, j, k, l;
+    inc = Math.PI * (3 - sqrt(5) + (parseFloat(magic) ? parseFloat(magic) : 0));
+    pour(i = 0; i < n; ++i) {
+    j = i * désactivé - 1 + (désactivé / 2);
+    phi = je * inc;
+    k = cos(phi);
+    l = sin(phi);
+    pts.push(o ? [j * xr, k * an, l * zr] : [k * xr, j * an, l * zr]);
+    }
+    retour de points ;
+    }
+    fonction Ring(o, n, xr, yr, zr, j) {
+    var phi, pts = [], inc = Math.PI * 2 / n, i, k, l;
+    pour(i = 0; i < n; ++i) {
+    phi = je * inc;
+    k = cos(phi);
+    l = sin(phi);
+    pts.push(o ? [j * xr, k * an, l * zr] : [k * xr, j * an, l * zr]);
+    }
+    retour de points ;
+    }
+    function PointsOnCylinderV(n,xr,yr,zr,m) { return Cylinder(n, 0, xr, yr, zr, m) }
+    function PointsOnCylinderH(n,xr,yr,zr,m) { return Cylinder(n, 1, xr, yr, zr, m) }
+    function PointsOnRingV(n, xr, yr, zr, offset) {
+    décalage = estNaN(décalage) ? 0 : décalage * 1 ;
+    return Ring(0, n, xr, yr, zr, offset);
+    }
+    function PointsOnRingH(n, xr, yr, zr, offset) {
+    décalage = estNaN(décalage) ? 0 : décalage * 1 ;
+    return Ring(1, n, xr, yr, zr, offset);
+    }
+    fonction ImageCentre(t) {
+    var i = nouvelle image ;
+    i.onload = fonction() {
+    var dx = i.largeur / 2, dy = i.hauteur / 2;
+    t.centreFunc = fonction(c, w, h, cx, cy) {
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    c.globalAlpha = 1 ;
+    c.drawImage(i, cx - dx, cy - dy);
+    } ;
+    } ;
+    i.src = t.centreImage;
+    }
+    function SetAlpha(c,a) {
+    var d = c, p1, p2, ae = (a*1).toPrecision(3) + ')';
+    if(c[0] === '#') {
+    si(!hexlookup3[c])
+    if(c.longueur === 4)
+    hexlookup3[c] = 'rgba(' + hexlookup1[c[1]] + hexlookup1[c[2]] + hexlookup1[c[3]];
+    autre
+    hexlookup3[c] = 'rgba(' + hexlookup2[c.substr(1,2)] + hexlookup2[c.substr(3,2)] + hexlookup2[c.substr(5,2)];
+    d = hexlookup3[c] + ae;
+    } else if(c.substr(0,4) === 'rgb(' || c.substr(0,4) === 'hsl(') {
+    d = (c.replace('(','a(').replace(')', ',' + ae));
+    } else if(c.substr(0,5) === 'rgba(' || c.substr(0,5) === 'hsla(') {
+    p1 = c.lastIndexOf(',') + 1, p2 = c.indexOf(')');
+    a *= parseFloat(c.substring(p1,p2));
+    d = c.substr(0,p1) + a.toPrecision(3) + ')';
+    }
+    retour d;
+    }
+    function NouveauToile(w,h) {
+    // si vous utilisez excanvas, abandonnez maintenant
+    if(window.G_vmlCanvasManager)
+    renvoie null ;
+    var c = doc.createElement('canvas');
+    c.largeur = w;
+    c.hauteur = h;
+    retour c;
+    }
+    // Je pense que tous les navigateurs réussissent ce test maintenant...
+    function ShadowAlphaBroken() {
+    var cv = NouveauToile(3,3), c, i;
+    si(!cv)
+    renvoie faux ;
+    c = cv.getContext('2d');
+    c.strokeStyle = '#000';
+    c.shadowColor = '#fff';
+    c.shadowBlur = 3;
+    c.globalAlpha = 0 ;
+    c.strokeRect(2,2,2,2) ;
+    c.globalAlpha = 1 ;
+    i = c.getImageData(2,2,1,1) ;
+    cv = nul ;
+    return (i.data[0] > 0);
+    }
+    function SetGradient(c, l, o, g) {
+    var gd = c.createLinearGradient (0, 0, l, 0), i;
+    pour(i dans g)
+    gd.addColorStop(1 - i, g[i]);
+    c.fillStyle = gd;
+    c.fillRect(0, o, l, 1);
+    }
+    function FindGradientColour(tc, p, r) {
+    var l = 1024, h = 1, gl = tc.weightGradient, cv, c, i, d;
+    if(tc.gCanvas) {
+    c = tc.gCanvas.getContext('2d');
+    h = tc.gCanvas.height;
+    } autre {
+    if(EstObjet(gl[0]))
+    h = gl.longueur;
+    autre
+    gl = [gl] ;
+    tc.gCanvas = cv = NouveauCanvas(l, h);
+    si(!cv)
+    renvoie null ;
+    c = cv.getContext('2d');
+    pour(i = 0; i < h; ++i)
+    SetGradient(c, l, i, gl[i]);
+    }
+    r = max(min(r || 0, h - 1), 0);
+    d = c.getImageData(~~((l - 1) * p), r, 1, 1).data;
+    return 'rgba(' + d[0] + ',' + d[1] + ',' + d[2] + ',' + (d[3]/255) + ')';
+    }
+    fonction TextSet(ctxt, police, couleur, chaînes, padx, pady, shadowColour,
+    shadowBlur, shadowOffsets, maxWidth, largeurs, align) {
+    var xo = padx + (flou d'ombre || 0) +
+    (shadowOffsets.length && shadowOffsets[0] < 0 ? abs(shadowOffsets[0]) : 0),
+    yo = pady + (shadowBlur || 0) +
+    (shadowOffsets.length && shadowOffsets[1] < 0 ? abs(shadowOffsets[1]) : 0), i, xc;
+    ctxt.font = police;
+    ctxt.textBaseline = 'top';
+    ctxt.fillStyle = couleur;
+    shadowColour && (ctxt.shadowColor = shadowColour);
+    shadowBlur && (ctxt.shadowBlur = shadowBlur);
+    shadowOffsets.length && (ctxt.shadowOffsetX = shadowOffsets[0],
+    ctxt.shadowOffsetY = shadowOffsets[1]);
+    for(i = 0; i < strings.length; ++i) {
+    xc = 0 ;
+    si(largeurs) {
+    if('right' == aligner) {
+    xc = maxWidth - largeurs[i] ;
+    } else if('centre' == aligner) {
+    xc = (maxWidth - largeurs[i]) / 2 ;
+    }
+    }
+    ctxt.fillText(strings[i], xo + xc, yo);
+    yo += parseInt(font);
+    }
+    }
+    fonction RRect(c, x, y, w, h, r, s) {
+    si(r) {
+    c.beginPath();
+    c.moveTo(x, y + h - r);
+    c.arcTo(x, y, x + r, y, r);
+    c.arcTo(x + w, y, x + w, y + r, r);
+    c.arcTo(x + w, y + h, x + w - r, y + h, r);
+    c.arcTo(x, y + h, x, y + h - r, r);
+    c.closePath();
+    c[s ? 'coup' : 'remplir']();
+    } autre {
+    c[s ? 'strokeRect' : 'fillRect'](x, y, w, h);
+    }
+    }
+    function TextCanvas(strings, font, w, h, maxWidth, stringWidths, align, valign,
+    escalader) {
+    this.strings = chaînes;
+    this.font = font;
+    this.width = w;
+    this.hauteur = h;
+    this.maxWidth = maxWidth;
+    this.stringWidths = stringWidths;
+    this.align = aligner;
+    this.valign = valign;
+    this.scale = échelle;
+    }
+    TCVproto = TextCanvas.prototype;
+    TCVproto.SetImage = function(image, l, h, position, remplissage, aligner, valigner,
+    escalader) {
+    this.image = image;
+    this.iwidth = w * this.scale;
+    this.iheight = h * this.scale;
+    this.ipos = position;
+    this.ipad = remplissage * this.scale;
+    this.iscale = échelle ;
+    this.ialign = aligner;
+    this.ivalign = valign;
+    } ;
+    TCVproto.Align = function(taille, espace, a) {
+    var pos = 0 ;
+    if(a == 'droit' || a == 'bas')
+    pos = espace - taille ;
+    else if(a != 'gauche' && a != 'top')
+    pos = (espace - taille) / 2 ;
+    retour pos;
+    } ;
+    TCVproto.Create = function(couleur, bgColour, bgOutline, bgOutlineThickness,
+    shadowColour, shadowBlur, shadowOffsets, remplissage, rayon) {
+    var cv, cw, ch, c, x1, x2, y1, y2, offx, offy, ix, iy, iw, ih, rr,
+    sox = abs(shadowOffsets[0]), soy = abs(shadowOffsets[1]), shadowcv, shadowc;
+    padding = max(padding, sox + shadowBlur, soja + shadowBlur);
+    x1 = 2 * (remplissage + bgOutlineThickness);
+    y1 = 2 * (remplissage + bgOutlineThickness);
+    cw = this.width + x1;
+    ch = this.height + y1;
+    offx = offy = remplissage + bgOutlineThickness;
+
+    si (cette.image) {
+    ix = iy = remplissage + bgOutlineThickness;
+    iw = this.iwidth;
+    ih = this.iheight;
+    if(this.ipos == 'haut' || this.ipos == 'bas') {
+    if(iw < this.width)
+    ix += this.Align(iw, this.width, this.ialign);
+    autre
+    offx += this.Align(this.width, iw, this.align);
+    if(this.ipos == 'top')
+    offy += ih + this.ipad;
+    autre
+    iy += this.height + this.ipad;
+    cw = max(cw, iw + x1) ;
+    ch += ih + this.ipad;
+    } autre {
+    if(ih < this.height)
+    iy += this.Align(ih, this.height, this.ivalign);
+    autre
+    offy += this.Align(this.height, ih, this.valign);
+    if(this.ipos == 'droit')
+    ix += this.width + this.ipad;
+    autre
+    offx += iw + this.ipad;
+    cw += iw + this.ipad;
+    ch = max(ch, ih + y1) ;
+    }
+    }
+
+    cv = NouveauToile(cw, ch);
+    si(!cv)
+    renvoie null ;
+    x1 = y1 = bgÉpaisseur du contour / 2 ;
+    x2 = cw - bgÉpaisseur du contour ;
+    y2 = ch - bgÉpaisseur du contour ;
+    rr = min(rayon, x2 / 2, y2 / 2);
+    c = cv.getContext('2d');
+    if(bgCouleur) {
+    c.fillStyle = bgColour;
+    RRect(c, x1, y1, x2, y2, rr);
+    }
+    if(bgÉpaisseur du contour) {
+    c.strokeStyle = bgOutline;
+    c.lineWidth = bgOutlineThickness;
+    RRect(c, x1, y1, x2, y2, rr, vrai);
+    }
+    if(shadowBlur || sox || soja) {
+    // utiliser un canevas transparent pour dessiner dessus
+    shadowcv = NewCanvas(cw, ch);
+    si(ombrecv) {
+    ombrec = c;
+    c = shadowcv.getContext('2d');
+    }
+    }
+
+    // ne pas utiliser le support d'ombre TextSet car il ajoute de l'espace pour l'ombre
+    TextSet(c, this.font, color, this.strings, offx, offy, 0, 0, [],
+    this.maxWidth, this.stringWidths, this.align);
+
+    si (cette.image)
+    c.drawImage(this.image, ix, iy, iw, ih);
+
+    si(ombrec) {
+    // dessine le texte et l'image avec l'ombre ajoutée
+    c = ombrec;
+    shadowColour && (c.shadowColor = shadowColour);
+    shadowBlur && (c.shadowBlur = shadowBlur);
+    c.shadowOffsetX = shadowOffsets[0];
+    c.shadowOffsetY = shadowOffsets[1];
+    c.drawImage(shadowcv, 0, 0);
+    }
+    retour cv;
+    } ;
+    function ExpandImage(i, w, h) {
+    var cv = NouveauToile(l, h), c;
+    si(!cv)
+    renvoie null ;
+    c = cv.getContext('2d');
+    c.drawImage(i, (w - i.width) / 2, (h - i.height) / 2);
+    retour cv;
+    }
+    fonction ÉchelleImage(i, w, h) {
+    var cv = NouveauToile(l, h), c;
+    si(!cv)
+    renvoie null ;
+    c = cv.getContext('2d');
+    c.drawImage(i, 0, 0, w, h);
+    retour cv;
+    }
+    fonction AddBackgroundToImage(i, w, h, scale, color, othickness, ocolor,
+    rembourrage, rayon, ofill) {
+    var cw = w + ((2 * remplissage) + épaisseur) * échelle,
+    ch = h + ((2 * remplissage) + épaisseur) * échelle,
+    cv = NewCanvas(cw, ch), c, x1, y1, x2, y2, ocanvas, cc, rr ;
+    si(!cv)
+    renvoie null ;
+    épaisseur *= échelle;
+    rayon *= échelle ;
+    x1 = y1 = épaisseur / 2 ;
+    x2 = cw - épaisseur ;
+    y2 = ch - épaisseur;
+    remplissage = (remplissage * échelle) + x1; // ajoute un espace pour le contour
+    c = cv.getContext('2d');
+    rr = min(rayon, x2 / 2, y2 / 2);
+    si (couleur) {
+    c.fillStyle = couleur;
+    RRect(c, x1, y1, x2, y2, rr);
+    }
+    si (épaisseur) {
+    c.strokeStyle = ocouleur;
+    c.lineWidth = épaisseur;
+    RRect(c, x1, y1, x2, y2, rr, vrai);
+    }
+
+    if(ofill) {
+    // utiliser la composition pour colorer l'image et la bordure
+    ocanvas = NouveauCanvas(cw, ch);
+    cc = ocanvas.getContext('2d');
+    cc.drawImage(i, remplissage, remplissage, l, h);
+    cc.globalCompositeOperation = 'source-in';
+    cc.fillStyle = ocouleur;
+    cc.fillRect(0, 0, cw, ch);
+    cc.globalCompositeOperation = 'destination-over';
+    cc.drawImage(cv, 0, 0);
+    cc.globalCompositeOperation = 'source-over';
+    c.drawImage(ocanvas, 0, 0);
+    } autre {
+    c.drawImage(i, remplissage, remplissage, i.largeur, i.hauteur);
+    }
+    return {image : cv, largeur : cw/échelle, hauteur : ch/échelle} ;
+    }
+    /**
+    * Arrondit les coins d'une image
+    */
+    fonction RoundImage(i, r, iw, ih, s) {
+    var cv, c, r1 = parseFloat(r), l = max(iw, ih);
+    cv = NouveauCanvas(iw, ih);
+    si(!cv)
+    renvoie null ;
+    if(r.indexOf('%') > 0)
+    r1 = l * r1 / 100 ;
+    autre
+    r1 = r1 * s;
+    c = cv.getContext('2d');
+    c.globalCompositeOperation = 'source-over';
+    c.fillStyle = '#fff';
+    si(r1 >= l/2) {
+    r1 = min(iw,ih) / 2 ;
+    c.beginPath();
+    c.moveTo(iw/2,ih/2);
+    c.arc(iw/2,ih/2,r1,0,2*Math.PI,false);
+    c.fill();
+    c.closePath();
+    } autre {
+    r1 = min(iw/2,ih/2,r1) ;
+    RRect(c, 0, 0, iw, ih, r1, vrai);
+    c.fill();
+    }
+    c.globalCompositeOperation = 'source-in';
+    c.drawImage(i, 0, 0, iw, ih);
+    retour cv;
+    }
+    /**
+    * Crée une nouvelle toile contenant l'image et son ombre
+    * Renvoie un objet contenant l'image et ses dimensions à z=0
+    */
+    function AddShadowToImage(i, w, h, scale, sc, sb, so) {
+    var sw = abs(so[0]), sh = abs(so[1]),
+    cw = w + (sw > sb ? sw + sb : sb * 2) * échelle,
+    ch = h + (sh > sb ? sh + sb : sb * 2) * échelle,
+    xo = échelle * ((sb || 0) + (so[0] < 0 ? sw : 0)),
+    yo = échelle * ((sb || 0) + (so[1] < 0 ? sh : 0)), cv, c;
+    cv = NouveauToile(cw, ch);
+    si(!cv)
+    renvoie null ;
+    c = cv.getContext('2d');
+    sc && (c.shadowColor = sc);
+    sb && (c.shadowBlur = sb * échelle);
+    so && (c.shadowOffsetX = so[0] * échelle, c.shadowOffsetY = so[1] * échelle);
+    c.drawImage(i, xo, yo, w, h);
+    return {image : cv, largeur : cw/échelle, hauteur : ch/échelle} ;
+    }
+    function FindTextBoundingBox(s,f,ht) {
+    var w = parseInt(s.toString().length * ht), h = parseInt(ht * 2 * s.length),
+    cv = NewCanvas(w,h), c, idata, w1, h1, x, y, i, ex;
+    si(!cv)
+    renvoie null ;
+    c = cv.getContext('2d');
+    c.fillStyle = '#000';
+    c.fillRect(0,0,w,h);
+    TextSet(c,ht + 'px ' + f,'#fff',s,0,0,0,0,[],'centre')
+
+    idata = c.getImageData(0,0,w,h);
+    w1 = idata.largeur ; h1 = idata.hauteur ;
+    ex = {
+    min : { x : w1, y : h1 },
+    max : { x : -1, y : -1 }
+    } ;
+    for(y = 0; y < h1; ++y) {
+    pour(x = 0; x < w1; ++x) {
+    i = (y * w1 + x) * 4 ;
+    if(idata.data[i+1] > 0) {
+    si(x < ex.min.x) ex.min.x = x;
+    si(x > ex.max.x) ex.max.x = x;
+    si(y < ex.min.y) ex.min.y = y ;
+    si(y > ex.max.y) ex.max.y = y ;
+    }
+    }
+    }
+    // les pixels de l'appareil peuvent ne pas être des pixels css
+    si(w1 != w) {
+    ex.min.x *= (w / w1) ;
+    ex.max.x *= (w / w1) ;
+    }
+    si(h1 !=h) {
+    ex.min.y *= (l / h1) ;
+    ex.max.y *= (w / h1) ;
+    }
+
+    cv = nul ;
+    retour ex;
+    }
+    function FixFont(f) {
+    return "'" + f.replace(/(\'|\")/g,'').replace(/\s*,\s*/g, "', '") + "'";
+    }
+    function AddHandler(h,f,e) {
+    e = e || docteur;
+    if(e.addEventListener)
+    e.addEventListener(h,f,false);
+    autre
+    e.attachEvent('on' + h, f);
+    }
+    function SupprimerHandler(h,f,e) {
+    e = e || docteur;
+    if(e.removeEventListener)
+    e.removeEventListener(h, f);
+    autre
+    e.detachEvent('on' + h, f);
+    }
+    fonction AddImage(i, o, t, tc) {
+    var s = tc.imageScale, mscale, ic, bc, oc, iw, ih ;
+    // image non chargée, attendre le chargement de l'image
+    si(!o.complete)
+    return AddHandler('load',function() { AddImage(i,o,t,tc); }, o);
+    si(!i.complet)
+    return AddHandler('load',function() { AddImage(i,o,t,tc); }, i);
+
+    // Oui, cela ressemble à un non-sens, mais cela garantit que les deux
+    // la largeur et la hauteur sont en fait définies et pas seulement calculées. C'est
+    // nécessaire de conserver des tailles proportionnelles lorsque les images sont masquées, donc
+    // les images peuvent être réutilisées pour un autre nuage.
+    o.largeur = o.largeur ;
+    o.hauteur = o.hauteur;
+
+    si(s) {
+    i.largeur = o.largeur * s;
+    i.hauteur = o.hauteur * s;
+    }
+    // la largeur standard de l'image, avec imageScale appliquée
+    t.iw = i.largeur ;
+    t.ih = i.hauteur ;
+    if(tc.txtOpt) {
+    ic = je;
+    mscale = tc.zoomMax * tc.txtScale ;
+    iw = t.iw * méchelle ;
+    ih = t.ih * méchelle ;
+    if(iw < o.naturalWidth || ih < o.naturalHeight) {
+    ic = ÉchelleImage(i, iw, ih);
+    si(ic)
+    t.fimage = ic;
+    } autre {
+    iw = t.iw;
+    ih = t.ih;
+    méchelle = 1 ;
+    }
+    if(parseFloat(tc.imageRadius))
+    t.image = t.fimage = i = RoundImage(t.image, tc.imageRadius, iw, ih, mscale);
+    if(!t.HasText()) {
+    if(tc.ombre) {
+    ic = AddShadowToImage(t.image, iw, ih, mscale, tc.shadow, tc.shadowBlur,
+    tc.shadowOffset);
+    si(ic) {
+    t.fimage = ic.image;
+    tw = ic.largeur ;
+    th = ic.hauteur;
+    }
+    }
+    if(tc.bgColour || tc.bgOutlineThickness) {
+    bc = tc.bgColour == 'tag' ? GetProperty(ta, 'background-color') :
+    tc.bgCouleur;
+    oc = tc.bgOutline == 'tag' ? GetProperty(ta, 'couleur') :
+    (tc.bgOutline || tc.textColour);
+    iw = t.fimage.largeur;
+    ih = t.fimage.hauteur;
+    if(tc.outlineMethod == 'couleur') {
+    // crée d'abord la version du contour, en utilisant l'état actuel de l'image
+    ic = AddBackgroundToImage(t.fimage, iw, ih, mscale, bc,
+    tc.bgOutlineThickness, t.outline.colour, tc.padding, tc.bgRadius, 1);
+    si(ic)
+    t.oimage = ic.image;
+    }
+    ic = AddBackgroundToImage(t.fimage, iw, ih, mscale, bc,
+    tc.bgOutlineThickness, oc, tc.padding, tc.bgRadius);
+    si(ic) {
+    t.fimage = ic.image;
+    tw = ic.largeur ;
+    th = ic.hauteur;
+    }
+    }
+    if(tc.outlineMethod == 'taille') {
+    if(tc.outlineIncrease > 0) {
+    t.iw += 2 * tc.outlineIncrease;
+    t.ih += 2 * tc.outlineIncrease;
+    iw = mscale * t.iw;
+    ih = mscale * t.ih;
+    ic = ÉchelleImage(t.fimage, iw, ih);
+    t.oimage = ic;
+    t.fimage = ExpandImage(t.fimage, t.oimage.width, t.oimage.height);
+    } autre {
+    iw = mscale * (t.iw + (2 * tc.outlineIncrease));
+    ih = mscale * (t.ih + (2 * tc.outlineIncrease));
+    ic = ÉchelleImage(t.fimage, iw, ih);
+    t.oimage = ExpandImage(ic, t.fimage.width, t.fimage.height);
+    }
+    }
+    }
+    }
+    t.Init();
+    }
+    function ObtenirPropriété(e,p) {
+    var dv = doc.defaultView, pc = p.replace(/\-([az])/g,function(a){return a.charAt(1).toUpperCase()});
+    return (dv && dv.getComputedStyle && dv.getComputedStyle(e,null).getPropertyValue(p)) ||
+    (e.currentStyle && e.currentStyle[pc]);
+    }
+    function FindWeight(a, wFrom, tHeight) {
+    var w = 1, p;
+    si(wDe) {
+    w = 1 * (a.getAttribute(wFrom) || tHeight);
+    } else if(p = GetProperty(a,'font-size')) {
+    w = (p.indexOf('px') > -1 && p.replace('px','') * 1) ||
+    (p.indexOf('pt') > -1 && p.replace('pt','') * 1,25) ||
+    p * 3,3 ;
+    }
+    retour w;
+    }
+    function EventToCanvasId(e) {
+    return e.target && Defined(e.target.id) ? e.cible.id :
+    e.srcElement.parentNode.id;
+    }
+    fonction EventXY(e, c) {
+    var xy, p, xmul = parseInt(GetProperty(c, 'width')) / c.width,
+    ymul = parseInt(GetProperty(c, 'hauteur')) / c.hauteur;
+    if(Défini(e.offsetX)) {
+    xy = {x : e.offsetX, y : e.offsetY} ;
+    } autre {
+    p = AbsPos(c.id);
+    if(Defined(e.changedTouches))
+    e = e.touches modifiées[0] ;
+    si(e.pageX)
+    xy = {x : e.pageX - px, y : e.pageY - py} ;
+    }
+    if(xy && xmul && ymul) {
+    xy.x /= xmul;
+    xy.y /= ymul;
+    }
+    renvoie xy ;
+    }
+    fonction MouseOut(e) {
+    var cv = e.cible || e.fromElement.parentNode, tc = TagCanvas.tc[cv.id];
+    si(tc) {
+    tc.mx = tc.my = -1 ;
+    tc.UnFreeze();
+    tc.EndDrag();
+    }
+    }
+    fonction MouseMove(e) {
+    var i, t = TagCanvas, tc, p, tg = EventToCanvasId(e);
+    pour(i dans t.tc) {
+    tc = t.tc[i];
+    if(tc.tttimer) {
+    clearTimeout(tc.tttimer);
+    tc.tttimer = nul ;
+    }
+    }
+    if(tg && t.tc[tg]) {
+    tc = t.tc[tg];
+    if(p = EventXY(e, tc.canvas)) {
+    tc.mx = px;
+    tc.my = py;
+    tc.Drag(e, p);
+    }
+    tc.drawn = 0;
+    }
+    }
+    fonction MouseDown(e) {
+    var t = TagCanvas, cb = doc.addEventListener ? 0 : 1,
+    tg = EventToCanvasId(e);
+    if(tg && e.button == cb && t.tc[tg]) {
+    t.tc[tg].BeginDrag(e);
+    }
+    }
+    fonction MouseUp(e) {
+    var t = TagCanvas, cb = doc.addEventListener ? 0 : 1,
+    tg = EventToCanvasId(e), tc;
+    if(tg && e.button == cb && t.tc[tg]) {
+    tc = t.tc[tg];
+    MouseMove(e);
+    if(!tc.EndDrag() && !tc.touchState)
+    tc.Clic(e);
+    }
+    }
+    fonction TouchDown(e) {
+    var tg = EventToCanvasId(e), tc = (tg && TagCanvas.tc[tg]), p;
+    if(tc && e.changedTouches) {
+    if(e.touches.length == 1 && tc.touchState == 0) {
+    tc.touchState = 1;
+    tc.BeginDrag(e);
+    if(p = EventXY(e, tc.canvas)) {
+    tc.mx = px;
+    tc.my = py;
+    tc.drawn = 0;
+    }
+    } else if(e.targetTouches.length == 2 && tc.pinchZoom) {
+    tc.touchState = 3;
+    tc.EndDrag();
+    tc.BeginPinch(e);
+    } autre {
+    tc.EndDrag();
+    tc.EndPinch();
+    tc.touchState = 0;
+    }
+    }
+    }
+    fonction Retouche(e) {
+    var tg = EventToCanvasId(e), tc = (tg && TagCanvas.tc[tg]);
+    if(tc && e.changedTouches) {
+    switch(tc.touchState) {
+    cas 1:
+    tc.Draw();
+    tc.Clicked();
+    Pause;
+    cas 2 :
+    tc.EndDrag();
+    Pause;
+    cas 3 :
+    tc.EndPinch();
+    }
+    tc.touchState = 0;
+    }
+    }
+    fonction TouchMove(e) {
+    var i, t = TagCanvas, tc, p, tg = EventToCanvasId(e);
+    pour(i dans t.tc) {
+    tc = t.tc[i];
+    if(tc.tttimer) {
+    clearTimeout(tc.tttimer);
+    tc.tttimer = nul ;
+    }
+    }
+    tc = (tg && t.tc[tg]);
+    if(tc && e.changedTouches && tc.touchState) {
+    switch(tc.touchState) {
+    cas 1:
+    cas 2 :
+    if(p = EventXY(e, tc.canvas)) {
+    tc.mx = px;
+    tc.my = py;
+    if(tc.Drag(e, p))
+    tc.touchState = 2;
+    }
+    Pause;
+    cas 3 :
+    tc.Pincer(e);
+    }
+    tc.drawn = 0;
+    }
+    }
+    function Molette de la souris(e) {
+    var t = TagCanvas, tg = EventToCanvasId(e);
+    if(tg && t.tc[tg]) {
+    e.cancelBubble = true;
+    e.ReturnValue = false;
+    e.preventDefault && e.preventDefault();
+    t.tc[tg].Wheel((e.wheelDelta || e.detail) > 0);
+    }
+    }
+    fonction Scroll(e) {
+    var i, t = TagCanvas;
+    clearTimeout(t.scrollTimer);
+    pour(i dans t.tc) {
+    t.tc[i].Pause();
+    }
+    t.scrollTimer = setTimeout(function() {
+    var i, t = TagCanvas;
+    pour(i dans t.tc) {
+    t.tc[i].Resume();
+    }
+    }, t.scrollPause);
+    }
+    function DrawCanvas() {
+    DrawCanvasRAF(TimeNow());
+    }
+    function DrawCanvasRAF(t) {
+    var tc = TagCanvas.tc, i;
+    TagCanvas.NextFrame(TagCanvas.interval);
+    t = t || C'est l'heure();
+    pour(i dans tc)
+    tc[i].Dessiner(t);
+    }
+    fonction PosPos(id) {
+    var e = doc.getElementById(id), r = e.getBoundingClientRect(),
+    dd = doc.documentElement, b = doc.body, w = fenêtre,
+    xs = w.pageXOffset || dd.scrollLeft,
+    ys = w.pageYOffset || dd.scrollTop,
+    xo = jj.clientGauche || b.clientGauche,
+    yo = jj.clientTop || b.clientTop ;
+    return { x : r.left + xs - xo, y : r.top + ys - yo } ;
+    }
+    function Projet(tc,p1,sx,sy) {
+    var m = tc.rayon * tc.z1 / (tc.z1 + tc.z2 + p1.z);
+    revenir {
+    x : p1.x * m * sx,
+    y : p1.y * m * sy,
+    z : p1.z,
+    w : (tc.z1 - p1.z) / tc.z2
+    } ;
+    }
+    /**
+    * @constructeur
+    * pour diviser de manière récursive le contenu des balises sur les balises <br>
+    */
+    fonction TextSplitter(e) {
+    this.e = e;
+    this.br = 0;
+    this.line = [];
+    this.text = [];
+    this.original = e.innerText || e.textContent;
+    }
+    TSproto = TextSplitter.prototype;
+    TSproto.Vide = fonction() {
+    for(var i = 0; i < this.text.length; ++i)
+    if(this.text[i].length)
+    renvoie faux ;
+    renvoie vrai ;
+    } ;
+    TSproto.Lignes = fonction(e) {
+    var r = e ? 1 : 0, cn, cl, je ;
+    e = e || ceci.e;
+    cn = e.childNodes;
+    cl = cn.longueur;
+
+    for(i = 0; i < cl; ++i) {
+    if(cn[i].NodeName == 'BR') {
+    this.text.push(this.line.join(' '));
+    this.br = 1;
+    } else if(cn[i].nodeType == 3) {
+    si (ceci.br) {
+    this.line = [cn[i].nodeValue];
+    this.br = 0;
+    } autre {
+    this.line.push(cn[i].nodeValue);
+    }
+    } autre {
+    this.Lignes(cn[i]);
+    }
+    }
+    r || ce.br || this.text.push(this.line.join(' '));
+    renvoie this.text;
+    } ;
+    TSproto.SplitWidth = fonction (w, c, f, h) {
+    var i, j, mots, texte = [];
+    c.font = h + 'px' + f;
+    for(i = 0; i < this.text.length; ++i) {
+    mots = this.text[i].split(/\s+/);
+    this.line = [mots[0]];
+    for(j = 1; j < mots.longueur; ++j) {
+    if(c.measureText(this.line.join(' ') + ' ' + mots[j]).width > w) {
+    text.push(this.line.join(' '));
+    this.line = [mots[j]];
+    } autre {
+    this.line.push(mots[j]);
+    }
+    }
+    text.push(this.line.join(' '));
+    }
+    return this.text = texte;
+    } ;
+    /**
+    * @constructeur
+    */
+    fonction Contour(tc,t) {
+    this.ts = null;
+    this.tc = tc;
+    this.tag = t;
+    this.x = this.y = this.w = this.h = this.sc = 1;
+    this.z = 0;
+    this.pulse = 1;
+    this.pulsate = tc.pulsateTo < 1;
+    this.color = tc.outlineColour;
+    this.adash = ~~tc.outlineDash;
+    this.agap = ~~tc.outlineDashSpace || this.adash;
+    this.aspeed = tc.outlineDashSpeed ​​* 1;
+    if(this.color == 'tag')
+    this.couleur = GetProperty(ta, 'couleur');
+    else if(this.colour == 'tagbg')
+    this.color = GetProperty(ta, 'background-color');
+    this.Draw = this.pulsate ? this.DrawPulsate : this.DrawSimple;
+    this.radius = tc.outlineRadius | 0 ;
+    this.SetMethod(tc.outlineMethod);
+    }
+    Oproto = Contour.prototype;
+    Oproto.SetMethod = function(om) {
+    méthodes var = {
+    bloc : ['PreDraw','DrawBlock'],
+    couleur : ['PreDraw','DrawColour'],
+    contour : ['PostDraw','DrawOutline'],
+    classique : ['LastDraw','DrawOutline'],
+    taille : ['PreDraw','DrawSize'],
+    aucun : ['Dernier tirage']
+    }, funcs = methodes[om] || methodes.outline;
+    if(om == 'aucun') {
+    this.Draw = function() { return 1; }
+    } autre {
+    this.drawFunc = this[funcs[1]];
+    }
+    this[funcs[0]] = this.Draw;
+    } ;
+    Oproto.Update = function(x,y,w,h,sc,z,xo,yo) {
+    var o = this.tc.outlineOffset, o2 = 2 * o;
+    this.x = sc * x + xo - o;
+    this.y = sc * y + yo - o;
+    this.w = sc * w + o2;
+    this.h = sc * h + o2;
+    this.sc = sc; // utilisé pour déterminer le premier
+    ceci.z = z;
+    } ;
+    Oproto.Fourmis = fonction(c) {
+    si(!ce.adash)
+    revenir;
+    var l = this.adash, g = this.agap, s = this.aspeed, length = l + g,
+    l1 = 0, l2 = l, g1 = g, g2 = 0, seq = 0, fourmis ;
+    si(s) {
+    seq = abs(s) * (TimeNow() - this.ts) / 50 ;
+    si(s < 0)
+    seq = 8.64e6 - seq;
+    s = ~~seq % longueur ;
+    }
+    si(s) {
+    si(l >= s) {
+    l1 = l - s;
+    l2 = s;
+    } autre {
+    g1 = longueur - s;
+    g2 = g - g1;
+    }
+    fourmis = [l1, g1, l2, g2] ;
+    } autre {
+    fourmis = [l,g];
+    }
+    c.setLineDash(fourmis);
+    }
+    Oproto.DrawOutline = function(c,x,y,w,h,couleur) {
+    var r = min(ce.rayon, h/2, w/2);
+    c.strokeStyle = couleur ;
+    ce.fourmis(c) ;
+    RRect(c, x, y, w, h, r, vrai);
+    } ;
+    Oproto.DrawSize = function(c,x,y,w,h,color,tag,x1,y1) {
+    var tw = tag.w, th = tag.h, m, i, sc;
+    if(this.pulsate) {
+    si(tag.image)
+    sc = (tag.image.height + this.tc.outlineIncrease) / tag.image.height;
+    autre
+    sc = tag.oscale;
+    i = tag.fimage || tag.image;
+    m = 1 + ((sc - 1) * (1-this.pulse));
+    tag.h *= m;
+    tag.w *= m;
+    } autre {
+    i = tag.oimage;
+    }
+    balise.alpha = 1;
+    tag.Draw(c, x1, y1, i);
+    tag.h = e;
+    tag.w = tw;
+    retour 1 ;
+    } ;
+    Oproto.DrawColour = function(c,x,y,w,h,color,tag,x1,y1) {
+    if(tag.oimage) {
+    if(this.pulse < 1) {
+    tag.alpha = 1 - pow(this.pulse, 2);
+    tag.Draw(c, x1, y1, tag.fimage);
+    tag.alpha = this.pulse;
+    } autre {
+    balise.alpha = 1;
+    }
+    tag.Draw(c, x1, y1, tag.oimage);
+    retour 1 ;
+    }
+    retourner this[tag.image ? 'DrawColourImage' : 'DrawColourText'](c,x,y,w,h,color,tag,x1,y1) ;
+    } ;
+    Oproto.DrawColourText = function(c,x,y,w,h,color,tag,x1,y1) {
+    var normal = tag.color;
+    tag.couleur = couleur;
+    balise.alpha = 1;
+    tag.Draw(c,x1,y1) ;
+    tag.couleur = normal;
+    retour 1 ;
+    } ;
+    Oproto.DrawColourImage = function(c,x,y,w,h,color,tag,x1,y1) {
+    var ccanvas = c.canvas, fx = ~~max(x,0), fy = ~~max(y,0),
+    fw = min(ccanvas.width - fx, w) + .5|0, fh = min(ccanvas.height - fy,h) + .5|0, cc;
+    si (ocanvas)
+    ocanvas.width = fw, ocanvas.height = fh;
+    autre
+    ocanvas = NouveauCanvas(fw, fh);
+    si(!ocanvas)
+    return this.SetMethod('outline'); // si vous utilisez IE et des images, abandonnez !
+    cc = ocanvas.getContext('2d');
+
+    cc.drawImage(ccanvas,fx,fy,fw,fh,0,0,fw,fh);
+    c.clearRect(fx,fy,fw,fh);
+    if(this.pulsate) {
+    tag.alpha = 1 - pow(this.pulse, 2);
+    } autre {
+    balise.alpha = 1;
+    }
+    tag.Draw(c,x1,y1) ;
+    c.setTransform(1,0,0,1,0,0);
+    c.save();
+    c.beginPath();
+    c.rect(fx,fy,fw,fh);
+    c.clip();
+    c.globalCompositeOperation = 'source-in';
+    c.fillStyle = couleur;
+    c.fillRect(fx,fy,fw,fh);
+    c.restaurer();
+    c.globalAlpha = 1 ;
+    c.globalCompositeOperation = 'destination-over';
+    c.drawImage(ocanvas,0,0,fw,fh,fx,fy,fw,fh);
+    c.globalCompositeOperation = 'source-over';
+    retour 1 ;
+    } ;
+    Oproto.DrawBlock = function(c,x,y,w,h,couleur) {
+    var r = min(ce.rayon, h/2, w/2);
+    c.fillStyle = couleur;
+    RRect(c, x, y, w, h, r);
+    } ;
+    Oproto.DrawSimple = function(c, tag, x1, y1, ga, useGa) {
+    var t = this.tc;
+    c.setTransform(1,0,0,1,0,0);
+    c.strokeStyle = this.color;
+    c.lineWidth = t.outlineThickness;
+    c.shadowBlur = c.shadowOffsetX = c.shadowOffsetY = 0;
+    c.globalAlpha = useGa ? g : 1 ;
+    renvoie this.drawFunc(c,this.x,this.y,this.w,this.h,this.colour,tag,x1,y1) ;
+    } ;
+    Oproto.DrawPulsate = fonction (c, balise, x1, y1) {
+    var diff = TimeNow() - this.ts, t = this.tc,
+    ga = t.pulsateTo + ((1 - t.pulsateTo) *
+    (0,5 + (cos(2 * Math.PI * diff / (1000 * t.pulsateTime)) / 2)));
+    this.pulse = ga = TagCanvas.Smooth(1,ga);
+    renvoie this.DrawSimple(c, tag, x1, y1, ga, 1);
+    } ;
+    Oproto.Active = fonction(c,x,y) {
+    var a = (x >= this.x && y >= this.y &&
+    x <= this.x + this.w && y <= this.y + this.h);
+    si un) {
+    ceci.ts = ceci.ts || C'est l'heure();
+    } autre {
+    this.ts = null;
+    }
+    retourner un;
+    } ;
+    Oproto.PreDraw = Oproto.PostDraw = Oproto.LastDraw = Non ;
+    /**
+    * @constructeur
+    */
+    Fonction Tag (tc, text, a, v, w, h, col, bcol, bradius, boutline, bothickness,
+    police, remplissage, original) {
+    this.tc = tc;
+    this.image = null;
+    this.text = texte;
+    this.text_original = original;
+    this.line_widths = [];
+    this.title = a.title || nul;
+    ceci.a = a;
+    this.position = nouveau vecteur(v[0], v[1], v[2]);
+    this.x = this.y = this.z = 0;
+    this.w = w;
+    this.h = h;
+    this.couleur = col || tc.textColour;
+    this.bgCouleur = bcol || tc.bgCouleur;
+    this.bgRadius = bradius | 0 ;
+    this.bgOutline = ligne de bout || cette.couleur;
+    this.bgOutlineThickness = Bothickness | 0 ;
+    this.textFont = font || tc.textFont;
+    this.padding = remplissage | 0 ;
+    this.sc = this.alpha = 1;
+    this.weighted = !tc.weight;
+    this.outline = new Outline(tc,this);
+    this.audio = null;
+    }
+    Tproto = Tag.prototype;
+    Tproto.Init = fonction(e) {
+    var tc = this.tc;
+    this.textHeight = tc.textHeight;
+    if(this.HasText()) {
+    this.Measure(tc.ctxt,tc);
+    } autre {
+    this.w = this.iw;
+    this.h = this.ih;
+    }
+
+    this.SetShadowColour = tc.shadowAlpha ? this.SetShadowColourAlpha : this.SetShadowColourFixed;
+    this.SetDraw(tc);
+    } ;
+    Tproto.Draw = Non;
+    Tproto.HasText = function() {
+    renvoie this.text && this.text[0].length > 0;
+    } ;
+    Tproto.EqualTo = fonction(e) {
+    var i = e.getElementsByTagName('img');
+    if(this.a.href != e.href)
+    renvoie 0 ;
+    si(i.longueur)
+    renvoie this.image.src == i[0].src;
+    return (e.innerText || e.textContent) == this.text_original;
+    } ;
+    Tproto.SetImage = function(i) {
+    this.image = this.fimage = i;
+    } ;
+    Tproto.SetAudio = fonction(a) {
+    this.audio = a;
+    this.audio.load();
+    } ;
+    Tproto.SetDraw = function(t) {
+    this.Draw = this.fimage ? (t.ie > 7 ? this.DrawImageIE : this.DrawImage) : this.DrawText;
+    t.noSelect && (this.CheckActive = Non);
+    } ;
+    Tproto.MeasureText = function(c) {
+    var i, l = this.text.length, w = 0, wl;
+    pour(i = 0; i < l; ++i) {
+    this.line_widths[i] = wl = c.measureText(this.text[i]).width;
+    w = max(w, wl);
+    }
+    retour w;
+    } ;
+    Tproto.Mesure = fonction(c,t) {
+    var extents = FindTextBoundingBox(this.text, this.textFont, this.textHeight),
+    s, th, f, soff, cw, twidth, theight, img, tcv;
+    // ajoute l'écart en haut à la hauteur pour faire un écart égal en bas
+    hauteur = étendue ? extents.max.y + extents.min.y : this.textHeight;
+    c.font = this.font = this.textHeight + 'px ' + this.textFont;
+    twidth = this.MeasureText(c);
+    if(t.txtOpt) {
+    s = t.txtÉchelle ;
+    th = s * this.textHeight;
+    f = th + 'px ' + this.textFont;
+    soff = [s * t.shadowOffset[0], s * t.shadowOffset[1]];
+    c.font = f;
+    cw = this.MeasureText(c);
+    tcv = new TextCanvas(this.text, f, cw + s, (s * theight) + s, cw,
+    this.line_widths, t.textAlign, t.textVAlign, s);
+
+    si (cette.image)
+    tcv.SetImage(this.image, this.iw, this.ih, t.imagePosition, t.imagePadding,
+    t.imageAlign, t.imageVAlign, t.imageScale);
+
+    img = tcv.Create(this.colour, this.bgColour, this.bgOutline,
+    s * this.bgOutlineThickness, t.shadow, s * t.shadowBlur, soff,
+    s * this.padding, s * this.bgRadius);
+
+    // ajoute une image de contour en utilisant la couleur de surbrillance
+    if(t.outlineMethod == 'couleur') {
+    this.oimage = tcv.Create(this.outline.colour, this.bgColour, this.outline.colour,
+    s * this.bgOutlineThickness, t.shadow, s * t.shadowBlur, soff,
+    s * this.padding, s * this.bgRadius);
+
+    } else if(t.outlineMethod == 'taille') {
+    étendues = FindTextBoundingBox(this.text, this.textFont,
+    this.textHeight + t.outlineIncrease);
+    th = étendue.max.y + étendue.min.y ;
+    f = (s * (this.textHeight + t.outlineIncrease)) + 'px ' + this.textFont;
+    c.font = f;
+    cw = this.MeasureText(c);
+
+    tcv = new TextCanvas(this.text, f, cw + s, (s * th) + s, cw,
+    this.line_widths, t.textAlign, t.textVAlign, s);
+    si (cette.image)
+    tcv.SetImage(this.image, this.iw + t.outlineIncrease,
+    this.ih + t.outlineIncrease, t.imagePosition, t.imagePadding,
+    t.imageAlign, t.imageVAlign, t.imageScale);
+
+    this.oimage = tcv.Create(this.colour, this.bgColour, this.bgOutline,
+    s * this.bgOutlineThickness, t.shadow, s * t.shadowBlur, soff,
+    s * this.padding, s * this.bgRadius);
+
+    this.oscale = this.oimage.width / img.width;
+    if(t.outlineIncrease > 0)
+    img = ExpandImage(img, this.oimage.width, this.oimage.height);
+    autre
+    this.oimage = ExpandImage(this.oimage, img.width, img.height);
+    }
+    si (img) {
+    this.fimage = img;
+    twidth = this.fimage.width / s;
+    theight = this.fimage.height / s;
+    }
+    this.SetDraw(t);
+    t.txtOpt = !!this.fimage;
+    }
+    this.h = la hauteur;
+    this.w = twidth;
+    } ;
+    Tproto.SetFont = function(f, c, bc, boc) {
+    this.textFont = f;
+    this.couleur = c;
+    this.bgCouleur = bc;
+    this.bgOutline = boc;
+    this.Measure(this.tc.ctxt, this.tc);
+    } ;
+    Tproto.SetWeight = function(w) {
+    var tc = this.tc, modes = tc.weightMode.split(/[, ]/), m, s, wl = w.length;
+    if(!this.HasText())
+    revenir;
+    this.weighted = vrai;
+    pour(s = 0; s < wl; ++s) {
+    m = modes[s] || 'Taille';
+    if('les deux' == m) {
+    this.Weight(w[s], tc.ctxt, tc, 'size', tc.min_weight[s],
+    tc.max_weight[s], s);
+    this.Weight(w[s], tc.ctxt, tc, 'couleur', tc.min_weight[s],
+    tc.max_weight[s], s);
+    } autre {
+    this.Weight(w[s], tc.ctxt, tc, m, tc.min_weight[s], tc.max_weight[s], s);
+    }
+    }
+    this.Measure(tc.ctxt, tc);
+    } ;
+    Tproto.Weight = function(w, c, t, m, wmin, wmax, wnum) {
+    w = estNaN(w) ? 1 : w ;
+    var npoids = (w - wmin) / (wmax - wmin);
+    if('couleur' ​​== m)
+    this.color = FindGradientColour(t, nweight, wnum);
+    else if('bgcolor' == m)
+    this.bgColour = FindGradientColour(t, nweight, wnum);
+    else if('bgoutline' == m)
+    this.bgOutline = FindGradientColour(t, nweight, wnum);
+    else if('contour' == m)
+    this.outline.colour = FindGradientColour(t, nweight, wnum);
+    else if('taille' == m) {
+    if(t.weightSizeMin > 0 && t.weightSizeMax > t.weightSizeMin) {
+    this.textHeight = t.weightSize *
+    (t.weightSizeMin + (t.weightSizeMax - t.weightSizeMin) * nweight);
+    } autre {
+    // texte minHauteur de 1
+    this.textHeight = max(1, w * t.weightSize);
+    }
+    }
+    } ;
+    Tproto.SetShadowColourFixed = function(c,s,a) {
+    c.shadowColor = s;
+    } ;
+    Tproto.SetShadowColourAlpha = function(c,s,a) {
+    c.shadowColor = SetAlpha(s, a);
+    } ;
+    Tproto.DrawText = function(c,xoff,yoff) {
+    var t = this.tc, x = this.x, y = this.y, s = this.sc, i, xl;
+    c.globalAlpha = this.alpha;
+    c.fillStyle = this.color;
+    t.shadow && this.SetShadowColour(c,t.shadow,this.alpha);
+    c.font = this.font;
+    x += xoff / s;
+    y += (yoff / s) - (this.h / 2);
+    for(i = 0; i < this.text.length; ++i) {
+    xl = x;
+    if('right' == t.textAlign) {
+    xl += this.w / 2 - this.line_widths[i] ;
+    } else if('centre' == t.textAlign) {
+    xl -= this.line_widths[i] / 2;
+    } autre {
+    xl -= this.w/2;
+    }
+    c.setTransform(s, 0, 0, s, s * xl, s * y);
+    c.fillText(this.text[i], 0, 0);
+    y += this.textHeight;
+    }
+    } ;
+    Tproto.DrawImage = function(c,xoff,yoff,im) {
+    var x = this.x, y = this.y, s = this.sc,
+    je = je || this.fimage, w = this.w, h = this.h, a = this.alpha,
+    shadow = this.shadow;
+    c.globalAlpha = a;
+    shadow && this.SetShadowColour(c,shadow,a);
+    x += (xoff / s) - (w / 2);
+    y += (yoff / s) - (h / 2);
+    c.setTransform(s, 0, 0, s, s * x, s * y);
+    c.drawImage(i, 0, 0, w, h);
+    } ;
+    Tproto.DrawImageIE = function(c,xoff,yoff) {
+    var i = this.fimage, s = this.sc,
+    w = i.width = this.w*s, h = i.height = this.h * s,
+    x = (this.x*s) + xoff - (w/2), y = (this.y*s) + yoff - (h/2);
+    c.setTransform(1,0,0,1,0,0);
+    c.globalAlpha = this.alpha;
+    c.drawImage(i, x, y);
+    } ;
+    Tproto.Calc = fonction(m,a) {
+    var pp, t = this.tc, mnb = t.minLuminosité,
+    mxb = t.maxBrightness, r = t.max_radius;
+    pp = m.xform(cette.position);
+    this.xformed = pp;
+    pp = Projet(t, pp, t.stretchX, t.stretchY);
+    this.x = pp.x;
+    this.y = pp.y;
+    this.z = pp.z;
+    this.sc = pp.w;
+    this.alpha = a * Clamp(mnb + (mxb - mnb) * (r - this.z) / (2 * r), 0, 1);
+    retourne this.xformed;
+    } ;
+    Tproto.UpdateActive = function(c, xoff, yoff) {
+    var o = this.outline, w = this.w, h = this.h,
+    x = this.x - w/2, y = this.y - h/2;
+    o.Update(x, y, w, h, this.sc, this.z, xoff, yoff);
+    retour o;
+    } ;
+    Tproto.CheckActive = function(c,xoff,yoff) {
+    var t = this.tc, o = this.UpdateActive(c, xoff, yoff);
+    return o.Active(c, t.mx, t.my) ? o : nul ;
+    } ;
+    Tproto.Clicked = function(e) {
+    var a = this.a, t = a.target, h = a.href, evt;
+    if(t != '' && t != '_self') {
+    if(self.frames[t]) {
+    self.frames[t].document.location = h;
+    } autre{
+    essayer {
+    if(top.frames[t]) {
+    top.frames[t].document.location = h;
+    revenir;
+    }
+    } catch(err) {
+    // domaine/port/protocole différent ?
+    }
+    window.open(h, t);
+    }
+    revenir;
+    }
+    if(doc.createEvent) {
+    evt = doc.createEvent('MouseEvents');
+    evt.initMouseEvent('click', 1, 1, window, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, null);
+    if(!a.dispatchEvent(evt))
+    revenir;
+    } else if(a.fireEvent) {
+    if(!a.fireEvent('onclick'))
+    revenir;
+    }
+    doc.emplacement = h;
+    } ;
+    Tproto.StopAudio = fonction() {
+    this.audio && this.playing && this.audio.pause();
+    this.stopped = 1;
+    this.playing = 0;
+    } ;
+    Tproto.PlayAudio = function() {
+    if(audio === 'off' || this.tc.audioOff)
+    revenir;
+    if(!audio && !SetupAudio())
+    revenir;
+
+    var a = this.tc.audio, g = this.tc.gain, sus = 'suspendu', p;
+    si (ceci.audio) {
+    if(!this.track) {
+    this.track = audio.createMediaElementSource(this.audio);
+    this.gain = audio.createGain();
+    this.track.connect(this.gain);
+    this.gain.connect(audio.destination);
+    }
+    a = this.audio;
+    g = this.gain;
+    si(!a.pause)
+    retour 1 ;
+    }
+
+    si un) {
+    if(audio.state == sus)
+    audio.resume();
+    if(audio.state == sus)
+    revenir;
+
+    g.gain.value = min(2, max(0, this.tc.audioVolume * 1));
+    a.currentTime = 0;
+    this.stopped = 0;
+    p = a.play();
+    if(p !== non défini) {
+    p.then(r => {
+    ça.arrêté ? this.audio.pause() : this.playing = 1;
+    });
+    }
+    retour 1 ;
+    }
+    } ;
+    /**
+    * @constructeur
+    */
+    function TagCanvas(cid,lctr,opt) {
+    var i, p, c = doc.getElementById(cid), cp = ['id','class','innerHTML'], raf;
+
+    si(!c) lance 0 ;
+    if(Défini(window.G_vmlCanvasManager)) {
+    c = window.G_vmlCanvasManager.initElement(c);
+    this.ie = parseFloat(navigator.appVersion.split('MSIE')[1]);
+    }
+    if(c && (!c.getContext || !c.getContext('2d').fillText)) {
+    p = doc.createElement('DIV');
+    for(i = 0; i < cp.length; ++i)
+    p[cp[i]] = c[cp[i]] ;
+    c.parentNode.insertBefore(p,c);
+    c.parentNode.removeChild(c);
+    lancer 0 ;
+    }
+    for(i dans TagCanvas.options)
+    this[i] = opt && Defined(opt[i]) ? opt[i] :
+    (Défini(TagCanvas[i]) ? TagCanvas[i] : TagCanvas.options[i]);
+
+    this.canvas = c;
+    this.ctxt = c.getContext('2d');
+    this.z1 = 250 / max(this.depth, 0,001) ;
+    this.z2 ​​= this.z1 / this.zoom;
+    this.radius = min(c.height, c.width) * 0,0075 ; // correspond à un rayon de 100 dans le canevas
+    this.max_radius = 100 ;
+    this.max_weight = [];
+    this.min_weight = [];
+    this.textFont = this.textFont && FixFont(this.textFont);
+    this.textHeight *= 1;
+    this.imageRadius = this.imageRadius.toString();
+    this.pulsateTo = Clamp(this.pulsateTo, 0, 1);
+    this.minBrightness = Clamp(this.minBrightness, 0, 1);
+    this.maxBrightness = Clamp(this.maxBrightness, this.minBrightness, 1);
+    this.ctxt.textBaseline = 'top';
+    this.lx = (this.lock + '').indexOf('x') + 1;
+    this.ly = (this.lock + '').indexOf('y') + 1;
+    this.frozen = this.dx = this.dy = this.fixedAnim = this.touchState = 0;
+    this.fixedAlpha = 1;
+    this.source = lctr || cid;
+    this.repeatTags = min(64, ~~this.repeatTags);
+    this.minTags = min(200, ~~this.minTags);
+    if(~~this.scrollPause > 0)
+    TagCanvas.scrollPause = ~~this.scrollPause;
+    autre
+    this.scrollPause = 0;
+    if(this.minTags > 0 && this.repeatTags < 1 && (i = this.GetTags().length))
+    this.repeatTags = ceil(this.minTags / i) - 1;
+    this.transform = Matrix.Identity();
+    this.startTime = this.time = TimeNow();
+    this.mx = this.my = -1;
+    this.centreImage && CentreImage(this);
+    this.Animate = this.dragControl ? this.AnimateDrag : this.AnimatePosition;
+    this.animTiming = (typeof TagCanvas[this.animTiming] == 'fonction' ?
+    TagCanvas[this.animTiming] : TagCanvas.Smooth);
+    if(this.shadowBlur || this.shadowOffset[0] || this.shadowOffset[1]) {
+    // laisse le navigateur traduire "rouge" en "#ff0000"
+    this.ctxt.shadowColor = this.shadow;
+    this.shadow = this.ctxt.shadowColor;
+    this.shadowAlpha = ShadowAlphaBroken();
+    } autre {
+    supprimer this.shadow ;
+    }
+    if(this.activeAudio === false) {
+    audio = « désactivé » ;
+    } autre {
+    this.activeAudio && this.LoadAudio();
+    }
+    this.Load();
+    if(lctr && this.hideTags) {
+    (fonction(t) {
+    if(TagCanvas.loaded)
+    t.HideTags();
+    autre
+    AddHandler('load', function() { t.HideTags(); }, window);
+    })(cette);
+    }
+
+    this.yaw = this.initial ? this.initial[0] * this.maxSpeed ​​: 0;
+    this.pitch = this.initial ? this.initial[1] * this.maxSpeed ​​: 0;
+    if(this.tooltip) {
+    this.ctitle = c.title;
+    c.titre = '';
+    if(this.tooltip == 'natif') {
+    this.Tooltip = this.TooltipNative;
+    } autre {
+    this.Tooltip = this.TooltipDiv;
+    si(!ce.ttdiv) {
+    this.ttdiv = doc.createElement('div');
+    this.ttdiv.className = this.tooltipClass;
+    this.ttdiv.style.position = 'absolu';
+    this.ttdiv.style.zIndex = c.style.zIndex + 1;
+    AddHandler('mouseover',function(e){e.target.style.display='none';},this.ttdiv);
+    doc.body.appendChild(this.ttdiv);
+    }
+    }
+    } autre {
+    this.Tooltip = this.TooltipNone;
+    }
+    if(!this.noMouse && !handlers[cid]) {
+    gestionnaires[cid] = [
+    ['mousemove', MouseMove],
+    ['mouseout', MouseOut],
+    ['mouseup', MouseUp],
+    ['touchstart', TouchDown],
+    ['toucher', retouche],
+    ['toucher annuler', Retouche],
+    ['touchmove', TouchMove]
+    ] ;
+    if(this.dragControl) {
+    handlers[cid].push(['mousedown', MouseDown]);
+    handlers[cid].push(['selectstart', Nop]);
+    }
+    if(this.wheelZoom) {
+    handlers[cid].push(['mousewheel', MouseWheel]);
+    handlers[cid].push(['DOMMouseScroll', MouseWheel]);
+    }
+    if(this.scrollPause) {
+    handlers[cid].push(['scroll', Scroll, window]);
+    }
+    for(i = 0; i < gestionnaires[cid].length; ++i) {
+    p = gestionnaires[cid][i] ;
+    AddHandler(p[0], p[1], p[2] ? p[2] : c);
+    }
+    }
+    if(!TagCanvas.started) {
+    raf = window.requestAnimationFrame = window.requestAnimationFrame ||
+    window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame;
+    TagCanvas.NextFrame = raf ? TagCanvas.NextFrameRAF :
+    TagCanvas.NextFrameTimeout;
+    TagCanvas.interval = this.interval;
+    TagCanvas.NextFrame(this.interval);
+    TagCanvas.started = 1;
+    }
+    }
+    TCproto = TagCanvas.prototype;
+    TCproto.SourceElements = function() {
+    if(doc.querySelectorAll)
+    return doc.querySelectorAll('#' + this.source);
+    return [doc.getElementById(this.source)] ;
+    } ;
+    TCproto.HideTags = function() {
+    var el = this.SourceElements(), i;
+    for(i = 0; i < el.longueur; ++i)
+    el[i].style.display = 'aucun';
+    } ;
+    TCproto.GetTags = fonction() {
+    var el = this.SourceElements(), etl, tl = [], i, j, k;
+    for(k = 0; k <= this.repeatTags; ++k) {
+    for(i = 0; i < el.length; ++i) {
+    etl = el[i].getElementsByTagName('a');
+    for(j = 0; j < etl.length; ++j) {
+    tl.push(etl[j]);
+    }
+    }
+    }
+    retour tl;
+    } ;
+    TCproto.Message = fonction(texte) {
+    var tl = [], i, p, tc = text.split(''), a, t, x, z;
+    for(i = 0; i < tc.length; ++i) {
+    if(tc[i] != ' ') {
+    p = i - tc.longueur / 2 ;
+    a = doc.createElement('A');
+    a.href = '#';
+    a.innerText = tc[i];
+    x = 100 * sin(p/9);
+    z = -100 * cos(p/9);
+    t = nouveau Tag(this, tc[i], a, [x,0,z], 2, 18, '#000', '#fff', 0, 0, 0,
+    'monospace', 2, tc[i]);
+    t.Init();
+    tl.push(t);
+    }
+    }
+    retour tl;
+    } ;
+    TCproto.AddAudio = fonction(e, t) {
+    if(audio === 'off')
+    revenir;
+    var au = e.getElementsByTagName('audio');
+    if(au.longueur) {
+    t.SetAudio(au[0]);
+    this.hasAudio = 1;
+    }
+    } ;
+    TCproto.CreateTag = function(e) {
+    var im, i, t, txt, ts, police, bc, boc, p = [0, 0, 0], au;
+    if('texte' != this.imageMode) {
+    im = e.getElementsByTagName('img');
+    if(im.longueur) {
+    i = nouvelle image ;
+    i.src = im[0].src;
+
+    if(!this.imageMode) {
+    t = nouveau Tag(this, "", e, p, 0, 0);
+    t.SetImage(i);
+    //t.Init();
+    AddImage(i, im[0], t, this);
+    this.AddAudio(e, t);
+    retourner t;
+    }
+    }
+    }
+    if('image' != this.imageMode) {
+    ts = nouveau TextSplitter(e);
+    txt = ts.Lignes();
+    if(!ts.Vide()) {
+    font = this.textFont || FixFont(GetProperty(e,'font-family'));
+    if(this.splitWidth)
+    txt = ts.SplitWidth(this.splitWidth, this.ctxt, font, this.textHeight);
+
+    bc = this.bgColour == 'tag' ? GetProperty(e, 'background-color') :
+    this.bgCouleur;
+    boc = this.bgOutline == 'tag' ? GetProperty(e, 'couleur') : this.bgOutline;
+    } autre {
+    ts = nul ;
+    }
+    }
+    si(ts || je) {
+    t = nouveau Tag(this, txt, e, p, 2, this.textHeight + 2,
+    this.textColour || GetProperty(e,'couleur'), ​​bc, this.bgRadius,
+    boc, this.bgOutlineThickness, police, this.padding, ts && ts.original);
+    si je) {
+    t.SetImage(i);
+    AddImage(i, im[0], t, this);
+    } autre {
+    t.Init();
+    }
+    this.AddAudio(e, t);
+    retourner t;
+    }
+    } ;
+    TCproto.UpdateTag = function(t, a) {
+    var color = this.textColour || GetProperty(a, 'couleur'),
+    font = this.textFont || FixFont(GetProperty(a, 'font-family')),
+    bc = this.bgColour == 'tag' ? GetProperty(a, 'background-color') :
+    this.bgColour, boc = this.bgOutline == 'tag' ? GetProperty(a, 'couleur') :
+    this.bgOutline;
+    ta = a;
+    t.titre = a.titre;
+    if(t.colour != color || t.textFont != font || t.bgColour != bc ||
+    t.bgOutline != boc)
+    t.SetFont(police, couleur, bc, boc);
+    } ;
+    TCproto.Weight = function(tl) {
+    var ll = tl.length, w, i, s, weights = [], valide,
+    wfrom = this.weightFrom ? this.weightFrom.split(/[, ]/) : [null],
+    wl = wde.longueur;
+    for(i = 0; i < ll; ++i) {
+    poids[i] = [] ;
+    pour(s = 0; s < wl; ++s) {
+    w = FindWeight(tl[i].a, wfrom[s], this.textHeight);
+    if(!this.max_weight[s] || w > this.max_weight[s])
+    this.max_weight[s] = w;
+    if(!this.min_weight[s] || w < this.min_weight[s])
+    this.min_weight[s] = w;
+    poids[i][s] = w;
+    }
+    }
+    pour(s = 0; s < wl; ++s) {
+    if(this.max_weight[s] > this.min_weight[s])
+    valide = 1 ;
+    }
+    si (valide) {
+    for(i = 0; i < ll; ++i) {
+    tl[i].SetWeight(weights[i]);
+    }
+    }
+    } ;
+    TCproto.Load = fonction() {
+    var tl = this.GetTags(), taglist = [], forme, t,
+    shapeArgs, rx, ry, rz, vl, i, tagmap = [], pfuncs = {
+    sphère : PointsSurSphère,
+    vcylinder : PointsOnCylinderV,
+    hcylindre : PointsOnCylinderH,
+    vring : PointsOnRingV,
+    hring : PointsSurRingH
+    } ;
+
+    if(tl.longueur) {
+    tagmap.length = tl.length;
+    for(i = 0; i < tl.length; ++i)
+    tagmap[i] = i;
+    this.shuffleTags && Shuffle(tagmap);
+    rx = 100 * this.radiusX;
+    ry = 100 * this.radiusY;
+    rz = 100 * this.radiusZ;
+    this.max_radius = max(rx, max(ry, rz));
+
+    for(i = 0; i < tl.length; ++i) {
+    t = this.CreateTag(tl[tagmap[i]]);
+    si(t)
+    taglist.push(t);
+    }
+    this.weight && this.Weight(taglist, true);
+
+    if(this.shapeArgs) {
+    this.shapeArgs[0] = taglist.length;
+    } autre {
+    shapeArgs = this.shape.toString().split(/[(),]/);
+    forme = formeArgs.shift();
+    if(typeof window[forme] === 'fonction')
+    this.forme = fenêtre[forme];
+    autre
+    this.shape = pfuncs[forme] || pfuncs.sphere;
+    this.shapeArgs = [taglist.length, rx, ry, rz].concat(shapeArgs);
+    }
+    vl = this.shape.apply(this, this.shapeArgs);
+    this.listLength = taglist.length;
+    for(i = 0; i < taglist.length; ++i)
+    taglist[i].position = nouveau vecteur(vl[i][0], vl[i][1], vl[i][2]);
+    }
+    if(this.noTagsMessage && !taglist.length) {
+    i = (this.imageMode && this.imageMode != 'les deux' ? this.imageMode + ' ': '');
+    taglist = this.Message('No ' + i + 'tags');
+    }
+    this.taglist = liste de balises ;
+    } ;
+    TCproto.Update = function() {
+    var tl = this.GetTags(), newlist = [],
+    taglist = this.taglist, trouvé,
+    ajouté = [], supprimé = [], vl, ol, nl, i, j;
+
+    si(!this.shapeArgs)
+    retourne this.Load();
+
+    if(tl.longueur) {
+    nl = this.listLength = tl.length;
+    ol = taglist.length;
+
+    // copier la liste existante, remplir "supprimé"
+    for(i = 0; i < ol; ++i) {
+    newlist.push(taglist[i]);
+    supprimé.push(i);
+    }
+
+    // recherche les balises ajoutées et supprimées
+    pour(i = 0; i < nl; ++i) {
+    for(j = 0, trouvé = 0; j < ol; ++j) {
+    if(taglist[j].EqualTo(tl[i])) {
+    this.UpdateTag(newlist[j], tl[i]);
+    trouvé = supprimé[j] = -1;
+    }
+    }
+    si trouvé)
+    ajouté.push(i);
+    }
+
+    // nettoie les balises trouvées de la liste supprimée
+    for(i = 0, j = 0; i < ol; ++i) {
+    if(supprimé[j] == -1)
+    supprimé.splice(j,1) ;
+    autre
+    ++j;
+    }
+
+    // insère de nouvelles balises dans les espaces où les anciennes balises ont été supprimées
+    if(supprimé.longueur) {
+    Mélanger (supprimé);
+    while(supprimé.longueur && ajouté.longueur) {
+    i = supprimé.shift();
+    j = ajouté.shift();
+    newlist[i] = this.CreateTag(tl[j]);
+    }
+
+    // en supprimer plus (dans l'ordre inverse)
+    remove.sort(function(a,b) {return ab});
+    while(removed.length) {
+    newlist.splice(removed.pop(), 1);
+    }
+    }
+
+    // ajouter des balises supplémentaires
+    j = newlist.length / (add.length + 1);
+    je = 0 ;
+    while(add.length) {
+    newlist.splice(ceil(++i * j), 0, this.CreateTag(tl[add.shift()]));
+    }
+
+    // assigne des positions correctes aux balises
+    this.shapeArgs[0] = nl = newlist.length;
+    vl = this.shape.apply(this, this.shapeArgs);
+    pour(i = 0; i < nl; ++i)
+    newlist[i].position = nouveau vecteur(vl[i][0], vl[i][1], vl[i][2]);
+
+    // repondérer les balises
+    this.weight && this.Weight(newlist);
+    }
+    this.taglist = nouvelle liste;
+    } ;
+    TCproto.SetShadow = function(c) {
+    c.shadowBlur = this.shadowBlur;
+    c.shadowOffsetX = this.shadowOffset[0];
+    c.shadowOffsetY = this.shadowOffset[1];
+    } ;
+    TCproto.LoadAudio = function() {
+    if(!audio && !SetupAudio())
+    revenir;
+    this.audio = doc.createElement('audio');
+    this.audio.src = this.activeAudio;
+    this.track = audio.createMediaElementSource(this.audio);
+    this.gain = audio.createGain();
+    this.track.connect(this.gain);
+    this.gain.connect(audio.destination);
+    this.hasAudio = 1;
+    audioClick = fonction(e) {
+    audio.resume();
+    doc.removeEventListener('click', audioClick);
+    } ;
+    doc.addEventListener('click', audioClick);
+    } ;
+    TCproto.ShowAudioIcon = function() {
+    var s = this.audioIconSize, cv = this.canvas, c = this.ctxt,
+    x = cv.width - s - 3, y = cv.height - s - 3, t = this.audioIconThickness,
+    c1 = '#000', c2 = '#fff', d = this.audioIconDark, muted = this.audioOff,
+    sus = 'suspendu';
+    si(!audio)
+    revenir;
+    si (! muet)
+    muet = (audio.state === sus);
+
+    if(this.audioIcon && this.hasAudio) {
+    AudioIcon(muet,c,s,x,y,t+1,d ? c2 : c1) ;
+    AudioIcon(muet,c,s,x,y,t,d ? c1 : c2) ;
+    }
+    } ;
+    TCproto.CheckAudioIcon = function() {
+    var s = this.audioIconSize, cv = this.canvas, t = this.audioIconThickness / 2,
+    x = cv.largeur - s - 3 - t, y = cv.hauteur - s - 3 - t ;
+    if(this.audioIcon && this.mx >= x && this.my >= y)
+    renvoie vrai ;
+    } ;
+    TCproto.ToggleAudio = function() {
+    var on = this.audioOff || (audio && audio.state === 'suspendu');
+    sur || this.currentAudio && this.currentAudio.StopAudio();
+    this.audioOff = !on;
+    } ;
+    TCproto.Dessiner = fonction(t) {
+    si (ce.pause)
+    revenir;
+    var cv = this.canvas, cw = cv.width, ch = cv.height, max_sc = 0,
+    tdelta = (t - this.time) * TagCanvas.interval / 1000,
+    x = cw / 2 + this.offsetX, y = ch / 2 + this.offsetY, c = this.ctxt,
+    actif, a, i, aindex = -1, tl = this.taglist, l = tl.length,
+    last = this.active && this.active.tag, curseur = '',
+    frontsel = this.frontSelect, centreDrawn = (this.centreFunc == Nop), corrigé ;
+    this.time = t;
+    if(this.congelé && this.drawn)
+    renvoie this.Animate(cw,ch,tdelta);
+    fixe = this.AnimateFixed();
+    c.setTransform(1,0,0,1,0,0);
+    pour(i = 0; i < l; ++i)
+    tl[i].Calc(this.transform, this.fixedAlpha);
+    tl = SortList(tl, function(a,b) {retour bz-az});
+
+    if(fixe && this.fixedAnim.active) {
+    active = this.fixedAnim.tag.UpdateActive(c, x, y);
+    } autre {
+    this.active = null;
+    if(this.CheckAudioIcon()) {
+    curseur = 'pointeur';
+    } autre {
+    pour(i = 0; i < l; ++i) {
+    a = this.mx >= 0 && this.my >= 0 && this.taglist[i].CheckActive(c, x, y);
+    if(a && a.sc > max_sc && (!frontsel || az <= 0)) {
+    actif = a;
+    un indice = i;
+    active.tag = this.taglist[i];
+    max_sc = a.sc;
+    }
+    }
+    this.actif = actif ;
+    }
+    }
+
+    this.txtOpt || (this.shadow && this.SetShadow(c));
+    c.clearRect(0,0,cw,ch);
+    pour(i = 0; i < l; ++i) {
+    if(!centreDrawn && tl[i].z <= 0) {
+    // exécute le centreFunc si la balise suivante est au premier plan
+    essayez { this.centreFunc(c, cw, ch, x, y); }
+    capture(e) {
+    alerte(s) ;
+    // ne le relance pas
+    this.centreFunc = Non;
+    }
+    centreDrawn = vrai;
+    }
+
+    if(!(actif && actif.tag == tl[i] && actif.PreDraw(c, tl[i], x, y)))
+    tl[i].Dessiner(c, x, y);
+    active && active.tag == tl[i] && active.PostDraw(c);
+    }
+    if(this.freezeActive && actif) {
+    this.Freeze();
+    } autre {
+    this.UnFreeze();
+    this.drawn = (l == this.listLength);
+    }
+    if(this.fixedCallback) {
+    this.fixedCallback(this,this.fixedCallbackTag);
+    this.fixedCallback = null;
+    }
+    fixe || this.Animate(cw, ch, tdelta);
+    si (actif) {
+    actif.Dernier Tirage(c);
+    if(active.tag != dernier) {
+    this.currentAudio && this.currentAudio != active.tag && this.currentAudio.StopAudio();
+    if(active.tag.PlayAudio())
+    this.currentAudio = active.tag;
+    }
+    curseur = this.activeCursor;
+    }
+    cv.style.cursor = curseur;
+    this.Tooltip(active,this.taglist[aindex]);
+    this.audioIcon && this.ShowAudioIcon();
+    } ;
+    TCproto.TooltipNone = function() { };
+    TCproto.TooltipNative = fonction (actif, balise) {
+    si (actif)
+    this.canvas.title = tag && tag.title ? tag.title : '';
+    autre
+    this.canvas.title = this.ctitle;
+    } ;
+    TCproto.SetTTDiv = function(titre, balise) {
+    var tc = ceci, s = tc.ttdiv.style;
+    if(titre != tc.ttdiv.innerHTML)
+    s.display = 'aucun';
+    tc.ttdiv.innerHTML = titre ;
+    balise && (tag.title = tc.ttdiv.innerHTML);
+    if(s.display == 'aucun' && ! tc.tttimer) {
+    tc.tttimer = setTimeout(function() {
+    var p = AbsPos(tc.canvas.id);
+    s.display = 'bloquer';
+    s.left = px + tc.mx + 'px';
+    s.top = py + tc.my + 24 + 'px' ;
+    tc.tttimer = nul ;
+    }, tc.tooltipDelay);
+    }
+    } ;
+    TCproto.TooltipDiv = fonction (actif, balise) {
+    if(actif && tag && tag.title) {
+    this.SetTTDiv(tag.title, tag);
+    } else if(!active && this.mx != -1 && this.my != -1 && this.ctitle.length) {
+    this.SetTTDiv(this.ctitle);
+    } autre {
+    this.ttdiv.style.display = 'aucun';
+    }
+    } ;
+    TCproto.Transform = function(tc, p, y) {
+    si(p || y) {
+    var sp = sin(p), cp = cos(p), sy = sin(y), cy = cos(y),
+    ym = nouvelle Matrice([cy,0,sy, 0,1,0, -sy,0,cy]),
+    pm = new Matrix([1,0,0, 0,cp,-sp, 0,sp,cp]);
+    tc.transform = tc.transform.mul(ym.mul(pm));
+    }
+    } ;
+    TCproto.AnimateFixed = function() {
+    var fa, t1, angle, m, d ;
+    si (ceci.fadeIn) {
+    t1 = TimeNow() - this.startTime;
+    if(t1 >= this.fadeIn) {
+    this.fadeIn = 0;
+    this.fixedAlpha = 1;
+    } autre {
+    this.fixedAlpha = t1 / this.fadeIn;
+    }
+    }
+    if(this.fixedAnim) {
+    if(!this.fixedAnim.transform)
+    this.fixedAnim.transform = this.transform;
+    fa = this.fixedAnim, t1 = TimeNow() - fa.t0, angle = fa.angle,
+    m, d = this.animTiming(fa.t, t1) ;
+    this.transform = fa.transform;
+    si(t1 >= fa.t) {
+    this.fixedCallbackTag = fa.tag;
+    this.fixedCallback = fa.cb;
+    this.fixedAnim = this.yaw = this.pitch = 0;
+    } autre {
+    angle *= d;
+    }
+    m = Matrix.Rotation(angle, fa.axis);
+    this.transform = this.transform.mul(m);
+    return (this.fixedAnim != 0);
+    }
+    renvoie faux ;
+    } ;
+    TCproto.AnimatePosition = function(w, h, t) {
+    var tc = ceci, x = tc.mx, y = tc.my, s, r;
+    if(!tc.gelé && x >= 0 && y >= 0 && x < w && y < h) {
+    s = tc.maxSpeed, r = tc.reverse ? -1 : 1 ;
+    tc.lx || (tc.yaw = ((x * 2 * s / w) - s) * r * t);
+    tc.ly || (tc.pas = ((y * 2 * s / h) - s) * -r * t);
+    tc.initial = nul ;
+    } else if(!tc.initial) {
+    if(tc.gelé && !tc.freezeDecel)
+    tc.yaw = tc.pitch = 0 ;
+    autre
+    tc.Decel(tc);
+    }
+    this.Transform(tc, tc.pitch, tc.yaw);
+    } ;
+    TCproto.AnimateDrag = function(w, h, t) {
+    var tc = this, rs = 100 * t * tc.maxSpeed ​​/ tc.max_radius / tc.zoom;
+    if(tc.dx || tc.dy) {
+    tc.lx || (tc.yaw = tc.dx * rs / tc.stretchX);
+    tc.ly || (tc.pitch = tc.dy * -rs / tc.stretchY);
+    tc.dx = tc.dy = 0 ;
+    tc.initial = nul ;
+    } else if(!tc.initial) {
+    tc.Decel(tc);
+    }
+    this.Transform(tc, tc.pitch, tc.yaw);
+    } ;
+    TCproto.Freeze = function() {
+    si(!ce.gelé) {
+    this.preFreeze = [this.yaw, this.pitch];
+    this.congelé = 1;
+    this.drawn = 0;
+    }
+    } ;
+    TCproto.UnFreeze = function() {
+    si (ce.congelé) {
+    this.yaw = this.preFreeze[0];
+    this.pitch = this.preFreeze[1];
+    this.congelé = 0;
+    }
+    } ;
+    TCproto.Decel = fonction(tc) {
+    var s = tc.minSpeed, ay = abs(tc.yaw), ap = abs(tc.pitch);
+    si(!tc.lx && ay > s)
+    tc.yaw = ay > tc.z0 ? tc.yaw * tc.decel : 0;
+    si(!tc.ly && ap > s)
+    tc.pas = ap > tc.z0 ? tc.pitch * tc.decel : 0;
+    } ;
+    TCproto.Zoom = fonction(r) {
+    ceci.z2 = ceci.z1 * (1/r);
+    this.drawn = 0;
+    } ;
+    TCproto.Clicked = function(e) {
+    if(this.CheckAudioIcon()) {
+    this.ToggleAudio();
+    revenir;
+    }
+    var a = this.active;
+    essayer {
+    si(un && un.tag)
+    if(this.clickToFront === false || this.clickToFront === null)
+    a.tag.Clic(e) ;
+    autre
+    this.TagToFront(a.tag, this.clickToFront, function() {
+    a.tag.Clic(e) ;
+    }, vrai);
+    } capture(ex) {
+    }
+    } ;
+    TCproto.Roue = fonction(i) {
+    var z = this.zoom + this.zoomStep * (i ? 1 : -1);
+    this.zoom = min(this.zoomMax,max(this.zoomMin,z));
+    this.Zoom(this.zoom);
+    } ;
+    TCproto.BeginDrag = function(e) {
+    this.down = EventXY(e, this.canvas);
+    e.cancelBubble = true;
+    e.ReturnValue = false;
+    e.preventDefault && e.preventDefault();
+    } ;
+    TCproto.Drag = fonction(e, p) {
+    if(this.dragControl && this.down) {
+    var t2 = this.dragThreshold * this.dragThreshold,
+    dx = px - this.down.x, dy = py - this.down.y ;
+    if(this.dragging || dx * dx + dy * dy > t2) {
+    ceci.dx = dx;
+    this.dy = dy;
+    this.dragging = 1;
+    this.down = p;
+    }
+    }
+    retourne this.drag;
+    } ;
+    TCproto.EndDrag = function() {
+    var res = this.dragging;
+    this.dragging = this.down = null;
+    retour res;
+    } ;
+    function PinchDistance(e) {
+    var t1 = e.targetTouches[0], t2 = e.targetTouches[1];
+    return sqrt(pow(t2.pageX - t1.pageX, 2) + pow(t2.pageY - t1.pageY, 2));
+    }
+    TCproto.BeginPinch = fonction(e) {
+    this.pinched = [PinchDistance(e), this.zoom];
+    e.preventDefault && e.preventDefault();
+    } ;
+    TCproto.Pinch = fonction(e) {
+    var z, d, p = this.pinched;
+    si p)
+    revenir;
+    d = PinchDistance(e);
+    z = p[1] * d / p[0] ;
+    this.zoom = min(this.zoomMax,max(this.zoomMin,z));
+    this.Zoom(this.zoom);
+    } ;
+    TCproto.EndPinch = fonction(e) {
+    this.pinched = null;
+    } ;
+    TCproto.Pause = function() { this.paused = true; } ;
+    TCproto.Resume = function() { this.paused = false; } ;
+    TCproto.SetSpeed ​​= function(i) {
+    this.initial = i;
+    this.yaw = i[0] * this.maxSpeed;
+    this.pitch = i[1] * this.maxSpeed;
+    } ;
+    TCproto.FindTag = fonction(t) {
+    si(!Défini(t))
+    renvoie null ;
+    Défini(t.index) && (t = t.index);
+    if(!EstObjet(t))
+    renvoie this.taglist[t] ;
+    var srch, objectif, je ;
+    if(Défini(t.id))
+    srch = 'id', cible = t.id;
+    else if(Defined(t.text))
+    srch = 'innerText', tgt = t.text;
+
+    for(i = 0; i < this.taglist.length; ++i)
+    if(this.taglist[i].a[srch] == objectif)
+    renvoie this.taglist[i] ;
+    } ;
+    TCproto.RotateTag = function(tag, lt, lg, time, callback, actif) {
+    var t = tag.Calc(this.transform, 1), v1 = nouveau vecteur(tx, ty, tz),
+    v2 = MakeVector(lg, lt), angle = v1.angle(v2), u = v1.cross(v2).unit();
+    si(angle == 0) {
+    this.fixedCallbackTag = tag ;
+    this.fixedCallback = rappel ;
+    } autre {
+    this.fixedAnim = {
+    angle: -angle,
+    axe : u,
+    t : temps,
+    t0 : TimeNow(),
+    cb : rappel,
+    balise: balise,
+    actif : actif
+    } ;
+    }
+    } ;
+    TCproto.TagToFront = function(tag, heure, rappel, actif) {
+    this.RotateTag(tag, 0, 0, heure, rappel, actif);
+    } ;
+    TCproto.Volume = fonction(vol) {
+    this.audioVolume = vol * 1;
+    } ;
+    TagCanvas.Start = function(id,l,o) {
+    TagCanvas.Delete(id);
+    TagCanvas.tc[id] = new TagCanvas(id,l,o);
+    } ;
+    fonction tccall(f,id) {
+    TagCanvas.tc[id] && TagCanvas.tc[id][f]();
+    }
+    TagCanvas.Linear = function(t, t0) { return t0 / t; }
+    TagCanvas.Smooth = function(t, t0) { return 0.5 - cos(t0 * Math.PI / t) / 2; }
+    TagCanvas.Pause = function(id) { tccall('Pause',id); } ;
+    TagCanvas.Resume = function(id) { tccall('Resume',id); } ;
+    TagCanvas.Reload = function(id) { tccall('Load',id); } ;
+    TagCanvas.Update = function(id) { tccall('Update',id); } ;
+    TagCanvas.SetSpeed ​​= function(id, vitesse) {
+    if(IsObject(speed) && TagCanvas.tc[id] &&
+    !isNaN(vitesse[0]) && !isNaN(vitesse[1])) {
+    TagCanvas.tc[id].SetSpeed(speed);
+    renvoie vrai ;
+    }
+    renvoie faux ;
+    } ;
+    TagCanvas.TagToFront = function(id, options) {
+    if(!IsObject(options))
+    renvoie faux ;
+    options.lat = options.lng = 0;
+    return TagCanvas.RotateTag(id, options);
+    } ;
+    TagCanvas.RotateTag = function(id, options) {
+    if(IsObject(options) && TagCanvas.tc[id]) {
+    si(estNaN(options.heure))
+    options.heure = 500 ;
+    var tt = TagCanvas.tc[id].FindTag(options);
+    si(tt) {
+    TagCanvas.tc[id].RotateTag(tt, options.lat, options.lng,
+    options.heure, options.rappel, options.active);
+    renvoie vrai ;
+    }
+    }
+    renvoie faux ;
+    } ;
+    TagCanvas.Delete = function(id) {
+    var je, c ;
+    if(gestionnaires[id]) {
+    c = doc.getElementById(id);
+    si(c) {
+    for(i = 0; i < gestionnaires[id].length; ++i)
+    RemoveHandler(handlers[id][i][0], handlers[id][i][1], c);
+    }
+    }
+    supprimer les gestionnaires[id] ;
+    supprimer TagCanvas.tc[id] ;
+    } ;
+    TagCanvas.NextFrameRAF = function() {
+    requestAnimationFrame(DrawCanvasRAF);
+    } ;
+    TagCanvas.NextFrameTimeout = function(iv) {
+    setTimeout(DrawCanvas, iv);
+    } ;
+    TagCanvas.tc = {};
+    TagCanvas.options = {
+    z1 : 20000,
+    z2 : 20000,
+    z0 : 0,0002,
+    gelActif : faux,
+    freezeDecel : faux,
+    activeCursor : 'pointeur',
+    pulseTo : 1,
+    temps de pulsation : 3,
+    inverse : faux,
+    profondeur : 0,5,
+    vitesse max : 0,05,
+    minVitesse : 0,
+    décélération : 0,95,
+    intervalle : 20,
+    minLuminosité : 0.1,
+    maxLuminosité : 1,
+    contourCouleur : '#ffff99',
+    contourÉpaisseur: 2,
+    contourDécalage : 5,
+    OutlineMethod : 'outline',
+    contourRayon : 0,
+    textColour: '#ff99ff',
+    texteHauteur : 15,
+    textFont : 'Helvetica, Arial, sans-serif',
+    ombre : '#000',
+    OmbreFlou : 0,
+    décalage d'ombre : [0,0],
+    initiale : nulle,
+    masquerÉtiquettes : vrai,
+    zoom : 1,
+    poids : faux,
+    weightMode: 'taille',
+    poidsDe : null,
+    poidsTaille : 1,
+    weightSizeMin : null,
+    weightSizeMax : null,
+    weightGradient : {0 : '#f00', 0,33 : '#ff0', 0,66 : '#0f0', 1 : '#00f'},
+    txtOpt : vrai,
+    txtÉchelle : 2,
+    frontSelect : faux,
+    wheelZoom : vrai,
+    zoom Min : 0.3,
+    zoomMax: 3,
+    pas de zoom : 0,05,
+    forme : 'sphère',
+    verrou : nul,
+    info-bulle : null,
+    infobulleDélai : 300,
+    tooltipClass : 'tctooltip',
+    rayonX : 1,
+    rayonY : 1,
+    rayonZ : 1,
+    étirementX : 1,
+    étirementY : 1,
+    décalageX : 0,
+    décalageY : 0,
+    shuffleÉtiquettes : faux,
+    noSelect : faux,
+    noMouse : faux,
+    imageÉchelle : 1,
+    en pause : faux,
+    dragControl : faux,
+    glisserSeuil : 4,
+    centreFunc : Non,
+    largeur de division : 0,
+    animTiming : 'Smooth',
+    clickToFront : faux,
+    fondu d'entrée : 0,
+    remplissage : 0,
+    bgCouleur : null,
+    bgRayon : 0,
+    bgOutline : null,
+    bgÉpaisseur du contour : 0,
+    contourAugmentation : 4,
+    textAlign : 'centre',
+    textVAlign: 'milieu',
+    ImageMode : null,
+    ImagePosition : nulle,
+    imagePadding: 2,
+    imageAlign : 'centre',
+    imageVAlign : 'milieu',
+    noTagsMessage : vrai,
+    centreImage : null,
+    pinchZoom : faux,
+    répéterÉtiquettes : 0,
+    minÉtiquettes : 0,
+    imageRayon : 0,
+    scrollPause : faux,
+    contourTiret : 0,
+    contourDashSpace : 0,
+    contourDashSpeed : 1,
+    activeAudio : '',
+    audioVolume : 1,
+    icône audio : 1,
+    audioIconTaille : 20,
+    audioIconÉpaisseur : 2,
+    audioIconDark : 0
+    } ;
+    for(i dans TagCanvas.options) TagCanvas[i] = TagCanvas.options[i] ;
+    window.TagCanvas = TagCanvas;
+    jQuery.fn.tagcanvas = fonction (options, lctr) {
+    var fn = {
+    pause : fonction() {
+    $(this).each(function() { tccall('Pause',$(this)[0].id); });
+    },
+    reprendre : fonction() {
+    $(this).each(function() { tccall('Resume',$(this)[0].id); });
+    },
+    recharger : function() {
+    $(this).each(function() { tccall('Load',$(this)[0].id); });
+    },
+    mise à jour : fonction() {
+    $(this).each(function() { tccall('Update',$(this)[0].id); });
+    },
+    tagtofront : function() {
+    $(this).each(function() { TagCanvas.TagToFront($(this)[0].id, lctr); });
+    },
+    balise de rotation : fonction() {
+    $(this).each(function() { TagCanvas.RotateTag($(this)[0].id, lctr); });
+    },
+    'supprimer' : fonction() {
+    $(this).each(function() { TagCanvas.Delete($(this)[0].id); });
+    },
+    setspeed: function() {
+    $(this).each(function() { TagCanvas.SetSpeed($(this)[0].id, lctr); });
+    }
+    } ;
+    if(typed'options == 'chaîne' && fn[options]) {
+    fn[options].appliquer(ceci);
+    retournez ceci;
+    } autre {
+    TagCanvas.jquery = 1;
+    $(this).each(function() { TagCanvas.Start($(this)[0].id, lctr, options); });
+    retourner TagCanvas.started;
+    }
+    } ;
+
+    // définit un indicateur pour le chargement de la fenêtre
+    AddHandler('load',function(){TagCanvas.loaded=1},window);
+    })(jQuery);
+  </Script>
+</html>
