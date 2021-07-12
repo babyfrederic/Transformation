@@ -1,0 +1,887 @@
+  
+/*!
+ * Onglets jQuery UI 1.11.4
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation et autres contributeurs
+ * Publié sous licence MIT.
+ * http://jquery.org/license
+ *
+ * http://api.jqueryui.com/tabs/
+ */
+( fonction (  usine  )  {
+	if  (  typeof  define  ===  "function"  &&  define . amd  )  {
+
+		// AMD. Inscrivez-vous en tant que module anonyme.
+		définir ( [
+			"jquery" ,
+			"./noyau" ,
+			"./widget"
+		] ,  usine  ) ;
+	}  autre  {
+
+		// Globales du navigateur
+		usine (  jQuery  ) ;
+	}
+} ( fonction (  $  )  {
+
+retourner  $ . widget (  "ui.tabs" ,  {
+	version : "1.11.4" ,
+	délai : 300 ,
+	choix : {
+		actif : nul ,
+		pliable : faux ,
+		événement : "clic" ,
+		heightStyle : "contenu" ,
+		masquer : null ,
+		afficher : nul ,
+
+		// rappels
+		activer : nul ,
+		avantActiver : null ,
+		beforeLoad : null ,
+		charge : nulle
+	} ,
+
+	_isLocal : ( fonction ( )  {
+		var  rhash  =  / #. * $ / ;
+
+		 fonction de retour (  ancre  )  {
+			var  ancreUrl ,  locationUrl ;
+
+			// prise en charge : IE7
+			// IE7 ne normalise pas la propriété href lorsqu'elle est définie via un script (#9317)
+			ancre  =  ancre . cloneNode (  false  ) ;
+
+			ancreUrl  =  ancre . href . replace (  rhash ,  " "  ) ;
+			emplacementUrl  =  emplacement . href . replace (  rhash ,  " "  ) ;
+
+			// le décodage peut générer une erreur si l'URL n'est pas UTF-8 (#9518)
+			essayez  {
+				ancreUrl  =  decodeURIComponent (  ancreUrl  ) ;
+			}  catch  (  erreur  )  { }
+			essayez  {
+				locationUrl  =  decodeURIComponent (  locationUrl  ) ;
+			}  catch  (  erreur  )  { }
+
+			 ancre de retour . hachage . longueur  >  1  &&  anchorUrl  ===  locationUrl ;
+		} ;
+	} ) ( ) ,
+
+	_create : fonction ( )  {
+		var  that  =  this ,
+			options  =  ceci . options ;
+
+		ça . en cours d'exécution  =  faux ;
+
+		ça . élément
+			. addClass (  "ui-tabs ui-widget ui-widget-content ui-corner-all"  )
+			. toggleClass (  " ui-tabs-pliable " ,  options . repliable  ) ;
+
+		ça . _processTabs ( ) ;
+		option . actif  =  ceci . _initialActive ( ) ;
+
+		// Prend les onglets de désactivation via l'attribut de classe du HTML
+		// en compte et mettre à jour l'option correctement.
+		if  (  $ . isArray (  options . disabled  )  )  {
+			option . désactivé  =  $ . unique (  options . désactivé . concat (
+				$ . map (  this . tabs . filter (  " .ui-state-disabled "  ) ,  function (  li  )  {
+					retourne  ça . onglets . index (  li  ) ;
+				} )
+			)  ) . trier ( ) ;
+		}
+
+		// vérifier la longueur évite les erreurs lors de l'initialisation d'une liste vide
+		if  (  this . options . active  !==  false  &&  this . anchors . length  )  {
+			ça . actif  =  ceci . _findActive (  options . active  ) ;
+		}  autre  {
+			ça . actif  =  $ ( ) ;
+		}
+
+		ça . _refresh ( ) ;
+
+		if  (  this . active . length  )  {
+			ça . charger (  options . actives  ) ;
+		}
+	} ,
+
+	_initialActive : fonction ( )  {
+		var  active  =  ceci . option . actif ,
+			pliable  =  ceci . option . pliable ,
+			emplacementHash  =  emplacement . hachage . sous -  chaîne ( 1  ) ;
+
+		if  (  actif  ===  null  )  {
+			// vérifier l'identifiant du fragment dans l'URL
+			if  (  emplacementHash  )  {
+				ça . onglets . each ( fonction (  i ,  tab  )  {
+					if  (  $ (  tab  ) . attr (  " aria-controls "  )  ===  locationHash  )  {
+						actif  =  je ;
+						renvoie  faux ;
+					}
+				} ) ;
+			}
+
+			// recherche d'un onglet marqué actif via une classe
+			if  (  actif  ===  null  )  {
+				actif  =  ceci . onglets . index (  this . tabs . filter (  " .ui-tabs-active "  )  ) ;
+			}
+
+			// pas d'onglet actif, défini sur false
+			if  (  actif  ===  null  ||  actif  ===  - 1  )  {
+				actif  =  ceci . onglets . longueur ? 0 : faux ;
+			}
+		}
+
+		// gérer les nombres : négatifs, hors limites
+		if  (  actif  !==  faux  )  {
+			actif  =  ceci . onglets . index (  this . tabs . eq (  actif  )  ) ;
+			si  (  actif  ===  - 1  )  {
+				actif  =  pliable ? faux : 0 ;
+			}
+		}
+
+		// ne permet pas de replier : false et actif : false
+		if  (  ! pliable  &&  actif  ===  faux  &&  this . ancres . longueur  )  {
+			actif  =  0 ;
+		}
+
+		retour  actif ;
+	} ,
+
+	_getCreateEventData : fonction ( )  {
+		retour  {
+			onglet : ceci . actif ,
+			panneau : ! ça . actif . longueur ? $ ( ) : ceci . _getPanelForTab (  ce . actif  )
+		} ;
+	} ,
+
+	_tabKeydown : fonction (  événement  )  {
+		var  focusTab  =  $ (  this . document [ 0 ] . activeElement  ) . le plus proche (  "li"  ) ,
+			selectedIndex  =  this . onglets . index (  focusTab  ) ,
+			aller de l'avant  =  vrai ;
+
+		if  (  this . _handlePageNav (  événement  )  )  {
+			retour ;
+		}
+
+		switch  (  événement . keyCode  )  {
+			cas  $ . ui . keyCode . DROITE :
+			cas  $ . ui . keyCode . BAS :
+				sélectionnéIndex ++ ;
+				pause ;
+			cas  $ . ui . keyCode . HAUT :
+			cas  $ . ui . keyCode . A GAUCHE :
+				aller de l'avant  =  false ;
+				index sélectionné -- ;
+				pause ;
+			cas  $ . ui . keyCode . FIN :
+				selectedIndex  =  this . ancres . longueur  -  1 ;
+				pause ;
+			cas  $ . ui . keyCode . ACCUEIL :
+				sélectionnéIndex  =  0 ;
+				pause ;
+			cas  $ . ui . keyCode . ESPACE :
+				// Activer uniquement, pas d'effondrement
+				événement . preventDefault ( ) ;
+				clearTimeout (  ce . activation  ) ;
+				ça . _activate (  selectedIndex  ) ;
+				retour ;
+			cas  $ . ui . keyCode . ENTRER :
+				// Basculer (annuler l'activation retardée, autoriser l'effondrement)
+				événement . preventDefault ( ) ;
+				clearTimeout (  ce . activation  ) ;
+				// Déterminer si nous devons réduire ou activer
+				ça . _activate (  selectedIndex  ===  this . options . active ? false : selectedIndex  ) ;
+				retour ;
+			par défaut :
+				retour ;
+		}
+
+		// Mettre l'accent sur l'onglet approprié, en fonction de la touche enfoncée
+		événement . preventDefault ( ) ;
+		clearTimeout (  ce . activation  ) ;
+		selectedIndex  =  this . _focusNextTab (  selectedIndex ,  goingForward  ) ;
+
+		// Naviguer avec la touche Ctrl/Commande empêchera l'activation automatique
+		if  (  ! event . ctrlKey  &&  ! event . metaKey  )  {
+
+			// Mettre à jour aria-selected immédiatement pour qu'AT pense que l'onglet est déjà sélectionné.
+			// Sinon, AT peut embrouiller l'utilisateur en déclarant qu'il doit activer l'onglet,
+			// mais l'onglet sera déjà activé à la fin de l'annonce.
+			focusTab . attr (  "aria-selected" ,  "false"  ) ;
+			ça . onglets . eq (  index sélectionné  ) . attr (  "aria-selected" ,  "true"  ) ;
+
+			ça . activation  =  ceci . _delay ( fonction ( )  {
+				ça . option (  " actif " ,  sélectionnéIndex  ) ;
+			} ,  ceci . retard  ) ;
+		}
+	} ,
+
+	_panelKeydown : fonction (  événement  )  {
+		if  (  this . _handlePageNav (  événement  )  )  {
+			retour ;
+		}
+
+		// Ctrl+up déplace le focus vers l'onglet courant
+		if  (  event . ctrlKey  &&  event . keyCode  ===  $ . ui . keyCode . UP  )  {
+			événement . preventDefault ( ) ;
+			ça . actif . mise au point ( ) ;
+		}
+	} ,
+
+	// Alt+page haut/bas déplace le focus vers l'onglet précédent/suivant (et active)
+	_handlePageNav : fonction (  événement  )  {
+		if  (  event . altKey  &&  event . keyCode  ===  $ . ui . keyCode . PAGE_UP  )  {
+			ça . _activate (  this . _focusNextTab (  this . options . active  -  1 ,  false  )  ) ;
+			renvoie  vrai ;
+		}
+		if  (  event . altKey  &&  event . keyCode  ===  $ . ui . keyCode . PAGE_DOWN  )  {
+			ça . _activate (  this . _focusNextTab (  this . options . active  +  1 ,  true  )  ) ;
+			renvoie  vrai ;
+		}
+	} ,
+
+	_findNextTab : function (  index ,  goingForward  )  {
+		var  lastTabIndex  =  this . onglets . longueur  -  1 ;
+
+		fonction  contrainte ( )  {
+			if  (  index  >  dernierTabIndex  )  {
+				indice  =  0 ;
+			}
+			si  (  indice  <  0  )  {
+				index  =  lastTabIndex ;
+			}
+			 indice de retour ;
+		}
+
+		while  (  $ . inArray (  contrainte ( ) ,  this . options . désactivé  )  !==  - 1  )  {
+			index  =  aller de l'avant ? indice  +  1 : indice  -  1 ;
+		}
+
+		 indice de retour ;
+	} ,
+
+	_focusNextTab : function (  index ,  goingForward  )  {
+		indice  =  ceci . _findNextTab (  index ,  goingForward  ) ;
+		ça . onglets . éq (  indice  ) . mise au point ( ) ;
+		 indice de retour ;
+	} ,
+
+	_setOption : fonction (  clé ,  valeur  )  {
+		if  (  clé  ===  "actif"  )  {
+			// _activate() gérera les valeurs invalides et mettra à jour this.options
+			ça . _activate (  valeur  ) ;
+			retour ;
+		}
+
+		if  (  clé  ===  "désactivé"  )  {
+			// n'utilise pas la gestion désactivée de la fabrique de widgets
+			ça . _setupDisabled (  valeur  ) ;
+			retour ;
+		}
+
+		ça . _super (  clé ,  valeur ) ;
+
+		if  (  clé  ===  "rétractable"  )  {
+			ça . élément . toggleClass (  " ui-tabs-collapsible " ,  valeur  ) ;
+			// Paramètre rétractable : false lorsque replié ; ouvrir le premier panneau
+			if  (  ! valeur  &&  this . options . active  ===  false  )  {
+				ça . _activer (  0  ) ;
+			}
+		}
+
+		if  (  clé  ===  "événement"  )  {
+			ça . _setupEvents (  valeur  ) ;
+		}
+
+		if  (  clé  ===  "hauteurStyle"  )  {
+			ça . _setupHeightStyle (  valeur  ) ;
+		}
+	} ,
+
+	_sanitizeSelector : fonction (  hachage  )  {
+		retourner le  hachage ? hachage . replace (  / [ !"$%&'()*+,. \/ :;<=>?@ \[ \] \^ `{|}~ ] / g ,  "\\$&"  ) : "" ;
+	} ,
+
+	rafraîchir : fonction ( )  {
+		var  options  =  ceci . choix ,
+			lis  =  ceci . tablist . enfants (  ":has(a[href])"  ) ;
+
+		// récupère les onglets désactivés de l'attribut de classe à partir du HTML
+		// cela sera converti en booléen si nécessaire dans _refresh()
+		option . désactivé  =  $ . map (  lis . filter (  " .ui-state-disabled "  ) ,  function (  tab  )  {
+			retour  lis . index (  tabulation  ) ;
+		} ) ;
+
+		ça . _processTabs ( ) ;
+
+		// était réduit ou pas d'onglets
+		if  (  options . active  ===  false  ||  ! this . ancres . length  )  {
+			option . actif  =  faux ;
+			ça . actif  =  $ ( ) ;
+		// était actif, mais l'onglet actif a disparu
+		}  else  if  (  this . active . length  &&  ! $ . contains (  this . tablist [  0  ] ,  this . active [  0  ]  )  )  {
+			// tous les onglets restants sont désactivés
+			if  (  this . tabs . length  ===  options . disabled . length  )  {
+				option . actif  =  faux ;
+				ça . actif  =  $ ( ) ;
+			// activer l'onglet précédent
+			}  autre  {
+				ça . _activate (  this . _findNextTab (  Math . max (  0 ,  options . active  -  1  ) ,  false  )  ) ;
+			}
+		// était actif, l'onglet actif existe toujours
+		}  autre  {
+			// s'assure que l'index actif est correct
+			option . actif  =  ceci . onglets . index (  this . actif  ) ;
+		}
+
+		ça . _refresh ( ) ;
+	} ,
+
+	_refresh : fonction ( )  {
+		ça . _setupDisabled (  this . options . disabled  ) ;
+		ça . _setupEvents (  cet événement . options . ) ; 
+		ça . _setupHeightStyle (  this . options . heightStyle  ) ;
+
+		ça . onglets . non (  ceci . actif  ) . attr ( {
+			"aria-selected" : "false" ,
+			"aria-expanded" : "false" ,
+			tabIndex : - 1
+		} ) ;
+		ça . panneaux . not (  this . _getPanelForTab (  this . active  )  )
+			. cacher ( )
+			. attr ( {
+				"aria-hidden" : "true"
+			} ) ;
+
+		// Assurez-vous qu'un onglet est dans l'ordre de tabulation
+		if  (  ! this . active . longueur  )  {
+			ça . onglets . éq (  0  ) . attr (  "tabIndex" ,  0  ) ;
+		}  autre  {
+			ça . actif
+				. addClass (  " ui-tabs-active ui-state-active "  )
+				. attr ( {
+					"aria-selected" : "true" ,
+					"aria-expanded" : "true" ,
+					tabIndex : 0
+				} ) ;
+			ça . _getPanelForTab (  ce . actif  )
+				. afficher ( )
+				. attr ( {
+					"aria-hidden" : "false"
+				} ) ;
+		}
+	} ,
+
+	_processTabs : fonction ( )  {
+		var  that  =  this ,
+			prevTabs  =  ceci . onglets ,
+			prevAnchors  =  this . ancres ,
+			prevPanels  =  ceci . panneaux ;
+
+		ça . tablist  =  ceci . _getListe ( )
+			. addClass (  " ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all "  )
+			. attr (  "rôle" ,  "tablist"  )
+
+			// Empêche les utilisateurs de se concentrer sur les onglets désactivés via un clic
+			. délégué (  "> li" ,  "mousedown"  +  this . eventNamespace ,  function (  event  )  {
+				if  (  $ (  this  ) . is (  " .ui-state-disabled "  )  )  {
+					événement . preventDefault ( ) ;
+				}
+			} )
+
+			// prise en charge : IE <9
+			// Empêcher l'action par défaut dans mousedown n'empêche pas IE
+			// de focaliser l'élément, donc si l'ancre est focalisée, flou.
+			// Nous n'avons pas à nous soucier de focaliser le focus précédemment
+			// élément puisque cliquer sur un élément non focalisable devrait se concentrer
+			// le corps de toute façon.
+			. délégué (  ".ui-tabs-anchor" ,  "focus"  +  this . eventNamespace ,  function ( )  {
+				if  (  $ (  this  ) . plus proche (  " li "  ) . is (  " .ui-state-disabled "  )  )  {
+					ça . flou ( ) ;
+				}
+			} ) ;
+
+		ça . onglets  =  ceci . tablist . find (  "> li:has(a[href])"  )
+			. addClass (  " ui-state-default ui-corner-top "  )
+			. attr ( {
+				rôle : "onglet" ,
+				tabIndex : - 1
+			} ) ;
+
+		ça . ancres  =  ceci . onglets . carte ( fonction ( )  {
+				return  $ (  " a " ,  this  ) [  0  ] ;
+			} )
+			. addClass (  "ui-tabs-anchor"  )
+			. attr ( {
+				rôle : "présentation" ,
+				tabIndex : - 1
+			} ) ;
+
+		ça . panneaux  =  $ ( ) ;
+
+		ça . ancres . chaque ( fonction (  je ,  ancre  )  {
+			var  selector ,  panel ,  panelId ,
+				ancreId  =  $ (  ancre  ) . uniqueId ( ) . attr (  " id "  ) ,
+				tab  =  $ (  ancre  ) . le plus proche (  "li"  ) ,
+				originalAriaControls  =  tab . attr (  " aria-contrôles "  ) ;
+
+			// onglet en ligne
+			if  (  that . _isLocal (  ancre  )  )  {
+				sélecteur  =  ancre . hachage ;
+				panelId  =  sélecteur . sous -  chaîne ( 1  ) ;
+				panneau  =  ça . élément . find (  que . _sanitizeSelector (  sélecteur  )  ) ;
+			// onglet distant
+			}  autre  {
+				// Si l'onglet n'a pas déjà de commandes aria,
+				// générer un identifiant en utilisant un élément jetable
+				panelId  =  tab . attr (  " aria-contrôles "  )  ||  $ (  { }  ) . uniqueId ( ) [  0  ] . identifiant ;
+				selector  =  "#"  +  panelId ;
+				panneau  =  ça . élément . find (  sélecteur  ) ;
+				if  (  ! panneau . longueur  )  {
+					panneau  =  ça . _createPanel (  panelId  ) ;
+					panneau . insertAfter (  ce . panels [  i  -  1  ]  ||  ce . tablist  ) ;
+				}
+				panneau . attr (  "aria-live" ,  "poli"  ) ;
+			}
+
+			if  (  panneau . longueur )  {
+				ça . panneaux  =  ça . panneaux . add (  panneau  ) ;
+			}
+			if  (  originalAriaControls  )  {
+				onglet . data (  "ui-tabs-aria-controls" ,  originalAriaControls  ) ;
+			}
+			onglet . attr ( {
+				"aria-controls" : panelId ,
+				"aria-labelledby" : anchorId
+			} ) ;
+			panneau . attr (  "aria-labelledby" ,  anchorId  ) ;
+		} ) ;
+
+		ça . panneaux
+			. addClass (  " ui-tabs-panel ui-widget-content ui-corner-bottom "  )
+			. attr (  "rôle" ,  "onglet"  ) ;
+
+		// Evite les fuites mémoire (#10056)
+		if  (  prevTabs  )  {
+			ça . _off (  prevTabs . not (  this . tabs  )  ) ;
+			ça . _off (  prevAnchors . not (  this . ancres  )  ) ;
+			ça . _off (  prevPanels . not (  this . panels  )  ) ;
+		}
+	} ,
+
+	// permet de remplacer la façon de trouver la liste pour les scénarios d'utilisation rares (#7715)
+	_getList : fonction ( )  {
+		retourne  ça . tablist  ||  ça . élément . find (  "ol,ul"  ) . éq (  0  ) ;
+	} ,
+
+	_createPanel : fonction (  id  )  {
+		return  $ (  "<div>"  )
+			. attr (  " id " ,  id  )
+			. addClass (  " ui-tabs-panel ui-widget-content ui-corner-bottom "  )
+			. data (  "ui-tabs-destroy" ,  true  ) ;
+	} ,
+
+	_setupDisabled : fonction (  désactivée  )  {
+		if  (  $ . isArray (  désactivé  )  )  {
+			if  (  ! désactivé . longueur  )  {
+				désactivé  =  faux ;
+			}  else  if  (  désactivé . longueur  ===  this . ancres . longueur  )  {
+				désactivé  =  vrai ;
+			}
+		}
+
+		// désactiver les onglets
+		for  (  var  i  =  0 ,  li ;  (  li  =  this . tabs [  i  ]  ) ;  i ++  )  {
+			if  (  désactivé  ===  vrai  ||  $ . inArray (  i ,  désactivé  )  !==  - 1  )  {
+				$ (  li  )
+					. addClass (  " ui-state-disabled "  )
+					. attr (  " aria-disabled " ,  " true "  ) ;
+			}  autre  {
+				$ (  li  )
+					. removeClass (  "ui-state-disabled"  )
+					. removeAttr (  " aria-disabled "  ) ;
+			}
+		}
+
+		ça . option . désactivé  =  désactivé ;
+	} ,
+
+	_setupEvents : fonction (  événement  )  {
+		var  événements  =  { } ;
+		si  (  événement  )  {
+			$ . each (  event . split ( " " ) ,  function (  index ,  eventName  )  {
+				événements [  eventName  ]  =  "_eventHandler" ;
+			} ) ;
+		}
+
+		ça . _off (  this . ancres . add (  this . tabs  ) . add (  this . panels  )  ) ;
+		// Toujours empêcher l'action par défaut, même lorsqu'elle est désactivée
+		ça . _on (  true ,  this . ancres ,  {
+			clic : fonction (  événement  )  {
+				événement . preventDefault ( ) ;
+			}
+		} ) ;
+		ça . _on (  this . ancres ,  événements  ) ;
+		ça . _on (  this . tabs ,  {  keydown : " _tabKeydown "  }  ) ;
+		ça . _on (  this . panels ,  {  keydown : " _panelKeydown "  }  ) ;
+
+		ça . _focusable (  this . tabs  ) ;
+		ça . _hoverable (  this . tabs  ) ;
+	} ,
+
+	_setupHeightStyle : function (  heightStyle  )  {
+		var  Hauteur max ,
+			parent  =  ceci . élément . parent ( ) ;
+
+		if  (  hauteurStyle  ===  "remplir"  )  {
+			hauteur max  =  parent . hauteur ( ) ;
+			maxHeight  -=  this . élément . externalHeight ( )  -  ceci . élément . hauteur ( ) ;
+
+			ça . élément . frères et sœurs (  ":visible"  ) . chaque ( fonction ( )  {
+				var  elem  =  $ (  this  ) ,
+					position  =  élém . css (  " position "  ) ;
+
+				if  (  position  ===  "absolue"  ||  position  ===  "fixe"  )  {
+					retour ;
+				}
+				maxHeight  -=  élém . externalHeight (  true  ) ;
+			} ) ;
+
+			ça . élément . enfants ( ) . pas (  ce . panneaux  ) . chaque ( fonction ( )  {
+				maxHeight  -=  $ (  this  ) . externalHeight (  true  ) ;
+			} ) ;
+
+			ça . panneaux . chaque ( fonction ( )  {
+				$ (  ceci  ) . hauteur (  Math . max (  0 ,  maxHeight  -
+					$ (  ceci  ) . innerHeight ( )  +  $ (  this  ) . hauteur ( )  )  ) ;
+			} )
+			. css (  "débordement" ,  "auto"  ) ;
+		}  else  if  (  heightStyle  ===  "auto"  )  {
+			hauteur max  =  0 ;
+			ça . panneaux . chaque ( fonction ( )  {
+				maxHeight  =  Maths . max (  hauteur max ,  $ (  this  ) . hauteur (  " "  ) . hauteur ( )  ) ;
+			} ) . hauteur (  hauteur max  ) ;
+		}
+	} ,
+
+	_eventHandler : fonction (  événement  )  {
+		var  options  =  ceci . choix ,
+			actif  =  ceci . actif ,
+			ancre  =  $ (  event . currentTarget  ) ,
+			tab  =  ancre . le plus proche (  "li"  ) ,
+			clickedIsActive  =  tab [  0  ]  ===  actif [  0  ] ,
+			collapsing  =  clickedIsActive  &&  options . pliable ,
+			toShow  =  s'effondrer ? $ ( ) : ceci . _getPanelForTab (  onglet  ) ,
+			cacher  =  ! actif . longueur ? $ ( ) : ceci . _getPanelForTab (  actif  ) ,
+			eventData  =  {
+				oldTab : actif ,
+				oldPanel : toHide ,
+				newTab : s'effondrer ? $ ( ) : tabulation ,
+				newPanel : toShow
+			} ;
+
+		événement . preventDefault ( ) ;
+
+		if  (  tab . hasClass (  " ui-state-disabled "  )  ||
+				// l'onglet est déjà en cours de chargement
+				onglet . hasClass (  "ui-tabs-loading"  )  ||
+				// impossible de changer pendant une animation
+				ça . en cours d'exécution  ||
+				// cliquez sur l'en-tête actif, mais pas réductible
+				(  ClickedIsActive  &&  ! Options . Pliable  )  ||
+				// autorise l'annulation de l'activation
+				(  this . _trigger (  "beforeActivate" ,  event ,  eventData  )  ===  false  )  )  {
+			retour ;
+		}
+
+		option . actif  =  s'effondrer ? faux : ceci . onglets . index (  tabulation  ) ;
+
+		ça . actif  =  cliquéIsActive ? $ ( ) : tabulation ;
+		if  (  this . xhr  )  {
+			ça . xh . abandonner ( ) ;
+		}
+
+		if  (  ! pour masquer . longueur  &&  ! pour afficher . longueur  )  {
+			$ . error (  " jQuery UI Tabs: Mismatching fragment identifier. "  ) ;
+		}
+
+		if  (  toAfficher . longueur  )  {
+			ça . load (  this . tabs . index (  tab  ) ,  événement  ) ;
+		}
+		ça . _toggle (  événement ,  eventData  ) ;
+	} ,
+
+	// gère afficher/masquer pour la sélection des onglets
+	_toggle : function (  event ,  eventData  )  {
+		var  that  =  this ,
+			toShow  =  eventData . nouveauPanneau ,
+			toHide  =  eventData . oldPanel ;
+
+		ça . en cours d'exécution  =  vrai ;
+
+		fonction  terminée ( )  {
+			ça . en cours d'exécution  =  faux ;
+			ça . _trigger (  "activer" ,  événement ,  eventData  ) ;
+		}
+
+		fonction  afficher ( )  {
+			eventData . nouvelTab . le plus proche (  " li "  ) . addClass (  " ui-tabs-active ui-state-active "  ) ;
+
+			if  (  toShow . length  &&  that . options . show  )  {
+				ça . _show (  toShow ,  that . options . show ,  complete  ) ;
+			}  autre  {
+				àMontrer . afficher ( ) ;
+				compléter ( ) ;
+			}
+		}
+
+		// commencez par masquer, puis montrer, puis terminer
+		if  (  toHide . length  &&  this . options . hide  )  {
+			ça . _hide (  toHide ,  this . options . hide ,  function ( )  {
+				eventData . ancienTab . le plus proche (  " li "  ) . removeClass (  " ui-tabs-active ui-state-active "  ) ;
+				afficher ( ) ;
+			} ) ;
+		}  autre  {
+			eventData . ancienTab . le plus proche (  " li "  ) . removeClass (  " ui-tabs-active ui-state-active "  ) ;
+			àMasquer . cacher ( ) ;
+			afficher ( ) ;
+		}
+
+		àMasquer . attr (  " aria-caché " ,  " vrai "  ) ;
+		eventData . ancienTab . attr ( {
+			"aria-selected" : "false" ,
+			"aria-expanded" : "false"
+		} ) ;
+		// Si nous changeons d'onglet, supprimez l'ancien onglet de l'ordre de tabulation.
+		// Si nous ouvrons à partir de l'état réduit, supprimez l'onglet précédent de l'ordre de tabulation.
+		// Si nous réduisons, gardez l'onglet de réduction dans l'ordre de tabulation.
+		if  (  afficher . longueur  &&  masquer . longueur  )  {
+			eventData . ancienTab . attr (  "tabIndex" ,  - 1  ) ;
+		}  else  if  (  toShow . longueur  )  {
+			ça . onglets . filtre ( fonction ( )  {
+				renvoie  $ (  ceci  ) . attr (  "tabIndex"  )  ===  0 ;
+			} )
+			. attr (  "tabIndex" ,  - 1  ) ;
+		}
+
+		àMontrer . attr (  " aria-caché " ,  " faux "  ) ;
+		eventData . nouvelTab . attr ( {
+			"aria-selected" : "true" ,
+			"aria-expanded" : "true" ,
+			tabIndex : 0
+		} ) ;
+	} ,
+
+	_activate : fonction (  index  )  {
+		 ancre var ,
+			actif  =  ceci . _findActive (  index  ) ;
+
+		// essaie d'activer le panneau déjà actif
+		if  (  actif [  0  ]  ===  this . actif [  0  ]  )  {
+			retour ;
+		}
+
+		// essaie de réduire, simule un clic sur l'en-tête actif actuel
+		if  (  ! actif . longueur  )  {
+			actif  =  ceci . actif ;
+		}
+
+		ancre  =  actif . find (  ".ui-tabs-anchor"  ) [  0  ] ;
+		ça . _eventHandler ( {
+			cible : ancre ,
+			Cible actuelle : ancre ,
+			preventDefault : $ . noop
+		} ) ;
+	} ,
+
+	_findActive : fonction (  index  )  {
+		 indice de  retour ===  faux ? $ ( ) : ceci . onglets . éq (  indice  ) ;
+	} ,
+
+	_getIndex : fonction (  index  )  {
+		// méta-fonction pour donner aux utilisateurs la possibilité de fournir une chaîne href au lieu d'un index numérique.
+		si  (  typeof  index  ===  "string"  )  {
+			indice  =  ceci . ancres . index (  ce . points d' ancrage . Filtre (  "[$ href = '"  +  index  +  "']"  )  ) ;
+		}
+
+		 indice de retour ;
+	} ,
+
+	_destroy : fonction ( )  {
+		if  (  this . xhr  )  {
+			ça . xh . abandonner ( ) ;
+		}
+
+		ça . élément . removeClass (  "ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-collapsible"  ) ;
+
+		ça . tablist
+			. removeClass (  " ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all "  )
+			. removeAttr (  "rôle"  ) ;
+
+		ça . ancres
+			. removeClass (  "ui-tabs-anchor"  )
+			. removeAttr (  "rôle"  )
+			. removeAttr (  "tabIndex"  )
+			. removeIdUnique ( ) ;
+
+		ça . tablist . unbind (  this . eventNamespace  ) ;
+
+		ça . onglets . ajouter (  ce . panneaux  ) . chaque ( fonction ( )  {
+			if  (  $ . data (  this ,  "ui-tabs-destroy"  )  )  {
+				$ (  ceci  ) . supprimer ( ) ;
+			}  autre  {
+				$ (  ceci  )
+					. removeClass (  " ui-state-default ui-state-active ui-state-disabled "  +
+						"ui-corner-top ui-corner-bottom ui-widget-content ui-tabs-active ui-tabs-panel"  )
+					. removeAttr (  "tabIndex"  )
+					. removeAttr (  "aria-live"  )
+					. removeAttr (  "aria-occupé"  )
+					. removeAttr (  "aria-selected"  )
+					. removeAttr (  "aria-labelledby"  )
+					. removeAttr (  " aria-caché "  )
+					. removeAttr (  " aria-expanded "  )
+					. removeAttr (  "rôle"  ) ;
+			}
+		} ) ;
+
+		ça . onglets . chaque ( fonction ( )  {
+			var  li  =  $ (  this  ) ,
+				précédent  =  li . data (  "ui-tabs-aria-controls"  ) ;
+			si  (  préc.  )  {
+				je suis
+					. attr (  "aria-controls" ,  prev  )
+					. removeData (  " ui-tabs-aria-controls "  ) ;
+			}  autre  {
+				li . removeAttr (  "aria-controls"  ) ;
+			}
+		} ) ;
+
+		ça . panneaux . afficher ( ) ;
+
+		if  (  this . options . heightStyle  !==  "content"  )  {
+			ça . panneaux . css (  "hauteur" ,  ""  ) ;
+		}
+	} ,
+
+	activer : fonction (  index  )  {
+		var  désactivé  =  ceci . option . handicapé ;
+		if  (  désactivé  ===  faux  )  {
+			retour ;
+		}
+
+		if  (  index  ===  non défini  )  {
+			désactivé  =  faux ;
+		}  autre  {
+			indice  =  ceci . _getIndex (  index  ) ;
+			if  (  $ . isArray (  désactivé  )  )  {
+				désactivé  =  $ . map (  désactivé ,  fonction (  num  )  {
+					return  num  !==  index ? nombre : nul ;
+				} ) ;
+			}  autre  {
+				désactivé  =  $ . map (  this . tabs ,  function (  li ,  num  )  {
+					return  num  !==  index ? nombre : nul ;
+				} ) ;
+			}
+		}
+		ça . _setupDisabled (  désactivé  ) ;
+	} ,
+
+	désactiver : fonction (  index  )  {
+		var  désactivé  =  ceci . option . handicapé ;
+		if  (  désactivé  ===  vrai  )  {
+			retour ;
+		}
+
+		if  (  index  ===  non défini  )  {
+			désactivé  =  vrai ;
+		}  autre  {
+			indice  =  ceci . _getIndex (  index  ) ;
+			if  (  $ . inArray (  index ,  désactivé  )  !==  - 1  )  {
+				retour ;
+			}
+			if  (  $ . isArray (  désactivé  )  )  {
+				désactivé  =  $ . merge (  [  index  ] ,  désactivé  ) . trier ( ) ;
+			}  autre  {
+				désactivé  =  [  index  ] ;
+			}
+		}
+		ça . _setupDisabled (  désactivé  ) ;
+	} ,
+
+	charge : fonction (  index ,  événement  )  {
+		indice  =  ceci . _getIndex (  index  ) ;
+		var  that  =  this ,
+			tab  =  ceci . onglets . éq (  indice  ) ,
+			ancre  =  tabulation . find (  ".ui-tabs-anchor"  ) ,
+			panneau  =  ceci . _getPanelForTab (  onglet  ) ,
+			eventData  =  {
+				onglet : onglet ,
+				panneau : panneau
+			} ,
+			complet  =  fonction (  jqXHR ,  état  )  {
+				if  (  status  ===  " abandonner "  )  {
+					ça . panneaux . stop (  faux ,  vrai  ) ;
+				}
+
+				onglet . removeClass (  "ui-tabs-loading"  ) ;
+				panneau . removeAttr (  "aria-occupé"  ) ;
+
+				if  (  jqXHR  ===  that . xhr  )  {
+					supprime  ça . xh ;
+				}
+			} ;
+
+		// pas à distance
+		if  (  this . _isLocal (  ancre [  0  ]  )  )  {
+			retour ;
+		}
+
+		ça . xhr  =  $ . ajax (  this . _ajaxSettings (  ancre ,  événement ,  eventData  )  ) ;
+
+		// prise en charge : jQuery <1.8
+		// jQuery <1.8 renvoie false si la requête est annulée dans beforeSend,
+		// mais à partir de la version 1.8, $.ajax() renvoie toujours un objet jqXHR.
+		if  (  this . xhr  &&  this . xhr . statusText  !==  "annulé"  )  {
+			onglet . addClass (  " ui-tabs-loading "  ) ;
+			panneau . attr (  " aria-occupé " ,  " vrai "  ) ;
+
+			ça . xh
+				. done ( fonction (  réponse ,  état ,  jqXHR  )  {
+					// prise en charge : jQuery <1.8
+					// http://bugs.jquery.com/ticket/11778
+					setTimeout ( fonction ( )  {
+						panneau . html (  réponse  ) ;
+						ça . _trigger (  "charge" ,  événement ,  eventData  ) ;
+
+						terminé (  jqXHR ,  état  ) ;
+					} ,  1  ) ;
+				} )
+				. fail ( fonction (  jqXHR ,  état  )  {
+					// prise en charge : jQuery <1.8
+					// http://bugs.jquery.com/ticket/11778
+					setTimeout ( fonction ( )  {
+						terminé (  jqXHR ,  état  ) ;
+					} ,  1  ) ;
+				} ) ;
+		}
+	} ,
+
+	_ajaxSettings : fonction (  ancre ,  événement ,  eventData  )  {
+		var  that  =  this ;
+		retour  {
+			URL : ancre . attr (  "href"  ) ,
+			avantEnvoi : fonction (  jqXHR ,  paramètres  )  {
+				retourne  ça . _trigger (  "beforeLoad" ,  événement ,
+					$ . extend (  {  jqXHR : jqXHR ,  ajaxSettings : paramètres  } ,  eventData  )  ) ;
+			}
+		} ;
+	} ,
+
+	_getPanelForTab : fonction (  onglet  )  {
+		var  id  =  $ (  tabulation  ) . attr (  " aria-contrôles "  ) ;
+		retourne  ça . élément . find (  this . _sanitizeSelector (  " # "  +  id  )  ) ) ;
+	}
+} ) ;
+
+} ) ) ;

@@ -1,0 +1,141 @@
+https://api.jquery.com/jquery.noconflict/
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.noConflict demo</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+ 
+<div id="log">
+  <h3>Before $.noConflict(true)</h3>
+</div>
+<script src="https://code.jquery.com/jquery-1.6.2.js"></script>
+ 
+<script>
+var $log = $( "#log" );
+ 
+$log.append( "2nd loaded jQuery version ($): " + $.fn.jquery + "<br>" );
+ 
+// Restore globally scoped jQuery variables to the first version loaded
+// (the newer version)
+ 
+jq162 = jQuery.noConflict( true );
+ 
+$log.append( "<h3>After $.noConflict(true)</h3>" );
+$log.append( "1st loaded jQuery version ($): " + $.fn.jquery + "<br>" );
+$log.append( "2nd loaded jQuery version (jq162): " + jq162.fn.jquery + "<br>" );
+</script>
+ 
+</body>
+</html>
+
+jQuery.noConflict()
+Catégories : Noyau | Divers > Méthodes de configuration
+jQuery.noConflict( [supprimerTout ] )Renvoie : Objet
+Description : abandonnez le contrôle de la $variable par jQuery .
+
+version ajoutée : 1.0jQuery.noConflict( [supprimerTout ] )
+Enlever tout
+Type : booléen
+Un booléen indiquant s'il faut supprimer toutes les variables jQuery de la portée globale (y compris jQuery lui-même).
+De nombreuses bibliothèques JavaScript utilisent $comme nom de fonction ou de variable, tout comme jQuery. Dans le cas de jQuery, $est juste un alias pour jQuery, donc toutes les fonctionnalités sont disponibles sans utiliser $. Si vous devez utiliser une autre bibliothèque JavaScript en plus de jQuery, retournez le contrôle de $l'autre bibliothèque avec un appel à $.noConflict(). Les anciennes références de $sont enregistrées lors de l'initialisation de jQuery ; noConflict()les restaure simplement.
+
+Si, pour une raison quelconque, deux versions de jQuery sont chargées (ce qui n'est pas recommandé), l'appel à $.noConflict( true )partir de la deuxième version renverra les variables jQuery à portée globale à celles de la première version.
+
+<script src="other_lib.js"></script>
+<script src="jquery.js"></script>
+<script>
+$.noConflict();
+// Code that uses other library's $ can follow here.
+</script>
+Cette technique est particulièrement efficace en conjonction avec la .ready()capacité de la méthode à aliaser l'objet jQuery, car dans le rappel qui .ready()vous est transmis, vous pouvez l'utiliser $si vous le souhaitez sans craindre de conflits ultérieurs :
+
+<script src="other_lib.js"></script>
+<script src="jquery.js"></script>
+<script>
+$.noConflict();
+jQuery( document ).ready(function( $ ) {
+  // Code that uses jQuery's $ can follow here.
+});
+// Code that uses other library's $ can follow here.
+</script>
+Si nécessaire, vous pouvez également libérer le jQuerynom en passant trueen argument la méthode. Ceci est rarement nécessaire, et si vous devez le faire (par exemple, si vous devez utiliser plusieurs versions de la bibliothèque jQuery sur la même page), vous devez considérer que la plupart des plug-ins reposent sur la présence de la jQueryvariable et peuvent ne fonctionne pas correctement dans cette situation.
+
+Exemples:
+Mappez l'objet d'origine référencé par $ à $.
+
+jQuery.noConflict();
+// Do something with jQuery
+jQuery( "div p" ).hide();
+// Do something with another library's $()
+$( "content" ).style.display = "none";
+Rétablissez l'alias $, puis créez et exécutez une fonction pour fournir le $ en tant qu'alias jQuery dans la portée de la fonction. À l'intérieur de la fonction, l'objet $ d'origine n'est pas disponible. Cela fonctionne bien pour la plupart des plugins qui ne reposent sur aucune autre bibliothèque.
+
+jQuery.noConflict();
+(function( $ ) {
+  $(function() {
+    // More code using $ as alias to jQuery
+  });
+})(jQuery);
+ 
+// Other code using $ as an alias to the other library
+Créez un alias différent au lieu de jQuery à utiliser dans le reste du script.
+
+var j = jQuery.noConflict();
+ 
+// Do something with jQuery
+j( "div p" ).hide();
+ 
+// Do something with another library's $()
+$( "content" ).style.display = "none";
+Déplacez complètement jQuery vers un nouvel espace de noms dans un autre objet.
+
+
+var dom = {};
+dom.query = jQuery.noConflict( true );
+Résultat:
+
+// Do something with the new jQuery
+dom.query( "div p" ).hide();
+ 
+// Do something with another library's $()
+$( "content" ).style.display = "none";
+ 
+// Do something with another version of jQuery
+jQuery( "div > p" ).hide();
+Chargez deux versions de jQuery (non recommandé). Ensuite, restaurez les variables de portée globale de jQuery sur le premier jQuery chargé.
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>jQuery.noConflict demo</title>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+ 
+<div id="log">
+  <h3>Before $.noConflict(true)</h3>
+</div>
+<script src="https://code.jquery.com/jquery-1.6.2.js"></script>
+ 
+<script>
+var $log = $( "#log" );
+ 
+$log.append( "2nd loaded jQuery version ($): " + $.fn.jquery + "<br>" );
+ 
+// Restore globally scoped jQuery variables to the first version loaded
+// (the newer version)
+ 
+jq162 = jQuery.noConflict( true );
+ 
+$log.append( "<h3>After $.noConflict(true)</h3>" );
+$log.append( "1st loaded jQuery version ($): " + $.fn.jquery + "<br>" );
+$log.append( "2nd loaded jQuery version (jq162): " + jq162.fn.jquery + "<br>" );
+</script>
+ 
+</body>
+</html>

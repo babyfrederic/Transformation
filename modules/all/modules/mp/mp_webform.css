@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document /modules/mp/mp_webform.css */
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+ 
+*/
+.button-div{}
+.webform-mp-form div.form-item{margin-top:1em!important; margin-bottom: 1em!important; position: relative}
+table{table-layout: fixed}
+.page-formulaire table th,.page-formulaire table td{text-align: center}
+.add-tr{ height: 47px!important; width: 32px!important; font-size: 50px!important; padding:0px!important; ; float: right}
+.mp-form-submit{cursor:pointer}
+.form-item-upload{clear: both}
+.form-item-upload{float: left}
+.form-managed-file{margin-top:10px!important}
+.form-file{margin-right:20px!important}
+legend{font-weight: bold}
+input[type="text"], input[type="password"], input[type="search"], input[type="email"], input[type="number"], textarea, select{padding:5px!important}
+.page-formulaire input[type="submit"]{padding:5px 10px; width: auto} 
+.form-item-checkbox input{margin-right: 15px}
+.ajax-processed{font-size: 12px!important}
+.page-formulaires .form-item{width: 100%}
+label{font-size: 18px!important; padding:10 0 10 0}
+.table-dynamique tr td input{width: 100%}
+.mp-form-submit{background:#00b0a5!important; color:#FFF; padding: 10px!important}
+.input-error{border:red 1px solid!important}
+input[name="upload_upload_button"]{float:right}

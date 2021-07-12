@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document modules/comment/comment.css */
+
+#comments {
+  margin-top: 15px;
+}
+.indented {
+  margin-left: 25px; /* LTR */
+}
+.comment-unpublished {
+  background-color: #fff4f4;
+}
+.comment-preview {
+  background-color: #ffffea;
+}
